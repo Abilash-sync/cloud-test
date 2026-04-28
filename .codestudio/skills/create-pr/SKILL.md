@@ -1,6 +1,6 @@
 ---
 name: create-pr
-description: "Generic PR creation workflow: branch checks, test gate, fill template, push, and open PR via Gitea REST API. Works for any stack (bug fix or feature)."
+description: "Generic PR creation workflow: branch checks, test gate, fill template, push, and open PR via Git. Works for any Git-based repository and any tech stack."
 ---
 
 # Generic PR Creation Skill
@@ -111,37 +111,53 @@ git push --force-with-lease
 
 ## Phase 5 — Create the PR
 
-### Token setup
+### 1. Obtain Access Token
 
-Load `GITEA_TOKEN` from a `.env` file at the workspace root:
+**Ask the user for their Git personal access token** with the following permissions:
+- `api` or `repo` — full repository access
+- `write:repository_hook` — to create webhooks (if needed)
+
+**Store temporarily** for this session only (do not commit):
 ```
-GITEA_TOKEN="your-personal-access-token"
-```
-Never commit this file.
-
-### Scripts (auto-detect URL and repo from git remote)
-
-**Windows PowerShell:**
-```powershell
-.\.codestudio\skills\git\scripts\create-pr.ps1 `
-  -Title "Bug(<id>): <summary>" `
-  -Base development `
-  -Label "cs:used" `
-  -Message "<filled PR body>"
+GIT_TOKEN="<user-provided-access-token>"
 ```
 
-**Unix / macOS / WSL:**
+### 2. Push Your Branch
+
+Ensure your branch is pushed to the remote:
 ```bash
-./.codestudio/skills/git/scripts/create-pr.sh \
-  --title "Bug(<id>): <summary>" \
-  --base development \
-  --label "cs:used" \
-  --message "<filled PR body>"
+git push origin <your-feature-branch>
 ```
 
-Use `--file path/to/filled-template.md` instead of `--message` for longer bodies.
+### 3. Create the PR
 
-> **Gate 4:** Script prints `PR #N created successfully!` with a URL.
+Use your Git hosting platform's CLI tool or web interface to create the PR:
+
+**GitHub (using `gh` CLI):**
+```bash
+gh pr create \
+  --title "Bug(<id>): <summary>" \
+  --body "<filled PR body from template>" \
+  --base development
+```
+
+**GitLab (using `glab` CLI):**
+```bash
+glab mr create \
+  --title "Bug(<id>): <summary>" \
+  --description "<filled PR body from template>" \
+  --target-branch development
+```
+
+**Generic Git Platform (manual web creation):**
+1. Navigate to your repository on the web platform
+2. Click **New PR** or **New Merge Request**
+3. Select your feature branch as the source
+4. Select the base branch (e.g., `development`)
+5. Paste the filled PR template into the description
+6. Submit
+
+> **Gate 4:** PR created successfully. Capture and verify the PR URL.
 
 ---
 
