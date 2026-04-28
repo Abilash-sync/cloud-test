@@ -1,219 +1,354 @@
-// Login form interactivity
-
-document.addEventListener('DOMContentLoaded', () => {
-    const loginForm = document.getElementById('loginForm');
-    const emailInput = document.getElementById('email');
-    const passwordInput = document.getElementById('password');
-    const togglePasswordBtn = document.querySelector('.toggle-password');
-    const submitBtn = document.querySelector('.submit-btn');
+// Real-time clock for status bar
+function updateTime() {
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    const timeString = `${hours}:${minutes}:${seconds}`;
     
-    // Password visibility toggle
-    if (togglePasswordBtn) {
-        togglePasswordBtn.addEventListener('click', () => {
-            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordInput.setAttribute('type', type);
-            
-            const eyeIcon = togglePasswordBtn.querySelector('.eye-icon');
-            if (type === 'text') {
-                eyeIcon.innerHTML = `
-                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
-                    <line x1="1" y1="1" x2="23" y2="23"></line>
-                `;
-            } else {
-                eyeIcon.innerHTML = `
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                    <circle cx="12" cy="12" r="3"></circle>
-                `;
+    const timeElement = document.getElementById('currentTime');
+    if (timeElement) {
+        timeElement.textContent = timeString;
+    }
+}
+
+// Update time immediately and then every second
+updateTime();
+setInterval(updateTime, 1000);
+
+// Password visibility toggle
+const toggleButton = document.querySelector('.toggle-visibility');
+const passwordInput = document.getElementById('password');
+const toggleIcon = document.getElementById('toggleIcon');
+
+if (toggleButton && passwordInput && toggleIcon) {
+    toggleButton.addEventListener('click', () => {
+        const isPassword = passwordInput.type === 'password';
+        passwordInput.type = isPassword ? 'text' : 'password';
+        toggleIcon.textContent = isPassword ? '◎' : '◉';
+        
+        // Add animation feedback
+        toggleButton.style.transform = 'translateY(-50%) scale(0.9)';
+        setTimeout(() => {
+            toggleButton.style.transform = 'translateY(-50%) scale(1)';
+        }, 100);
+    });
+}
+
+// Form validation and submission
+const loginForm = document.getElementById('loginForm');
+const emailInput = document.getElementById('email');
+const submitButton = document.querySelector('.submit-button');
+
+if (loginForm) {
+    // Real-time input validation feedback
+    const validateEmail = (email) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
+
+    const validatePassword = (password) => {
+        return password.length >= 8;
+    };
+
+    // Add input listeners for real-time validation
+    if (emailInput) {
+        emailInput.addEventListener('input', (e) => {
+            const isValid = validateEmail(e.target.value);
+            updateInputState(e.target, isValid);
+        });
+
+        emailInput.addEventListener('blur', (e) => {
+            if (e.target.value.length > 0) {
+                const isValid = validateEmail(e.target.value);
+                updateInputState(e.target, isValid);
             }
         });
     }
-    
-    // Form validation
-    const validateEmail = (email) => {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return re.test(email);
-    };
-    
-    const showError = (input, message) => {
-        const wrapper = input.closest('.input-wrapper');
-        let errorMsg = wrapper.querySelector('.error-message');
-        
-        if (!errorMsg) {
-            errorMsg = document.createElement('div');
-            errorMsg.className = 'error-message';
-            errorMsg.style.cssText = 'color: var(--color-error); font-size: 0.875rem; margin-top: 0.5rem; animation: fadeInUp 0.3s ease;';
-            wrapper.appendChild(errorMsg);
-        }
-        
-        errorMsg.textContent = message;
-        input.style.borderColor = 'var(--color-error)';
-    };
-    
-    const clearError = (input) => {
-        const wrapper = input.closest('.input-wrapper');
-        const errorMsg = wrapper.querySelector('.error-message');
-        
-        if (errorMsg) {
-            errorMsg.remove();
-        }
-        
-        input.style.borderColor = '';
-    };
-    
-    // Real-time validation
-    emailInput?.addEventListener('blur', () => {
-        const email = emailInput.value.trim();
-        
-        if (email && !validateEmail(email)) {
-            showError(emailInput, 'Please enter a valid email address');
-        } else {
-            clearError(emailInput);
-        }
-    });
-    
-    emailInput?.addEventListener('input', () => {
-        if (emailInput.value.trim()) {
-            clearError(emailInput);
-        }
-    });
-    
-    passwordInput?.addEventListener('input', () => {
-        clearError(passwordInput);
-    });
-    
-    // Form submission
-    loginForm?.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        let isValid = true;
-        const email = emailInput.value.trim();
-        const password = passwordInput.value;
-        
-        // Clear previous errors
-        clearError(emailInput);
-        clearError(passwordInput);
-        
-        // Validate email
-        if (!email) {
-            showError(emailInput, 'Email is required');
-            isValid = false;
-        } else if (!validateEmail(email)) {
-            showError(emailInput, 'Please enter a valid email address');
-            isValid = false;
-        }
-        
-        // Validate password
-        if (!password) {
-            showError(passwordInput, 'Password is required');
-            isValid = false;
-        } else if (password.length < 6) {
-            showError(passwordInput, 'Password must be at least 6 characters');
-            isValid = false;
-        }
-        
-        if (!isValid) {
-            return;
-        }
-        
-        // Simulate login (replace with actual API call)
-        submitBtn.disabled = true;
-        submitBtn.style.opacity = '0.7';
-        
-        const originalText = submitBtn.querySelector('.btn-text').textContent;
-        submitBtn.querySelector('.btn-text').textContent = 'Signing in...';
-        
-        try {
-            // Simulate API call
-            await new Promise(resolve => setTimeout(resolve, 1500));
-            
-            // Success animation
-            submitBtn.querySelector('.btn-text').textContent = 'Success!';
-            submitBtn.style.background = 'linear-gradient(135deg, var(--color-success), #10b981)';
-            
-            // Store form data (in production, handle securely)
-            const formData = {
-                email: email,
-                remember: document.getElementById('remember').checked,
-                timestamp: new Date().toISOString()
-            };
-            
-            console.log('Login attempted with:', formData);
-            
-            // Redirect after success (replace with actual redirect)
-            setTimeout(() => {
-                // window.location.href = '/dashboard';
-                alert('Login successful! (This is a demo - no actual authentication)');
-                loginForm.reset();
-                submitBtn.disabled = false;
-                submitBtn.style.opacity = '1';
-                submitBtn.querySelector('.btn-text').textContent = originalText;
-                submitBtn.style.background = '';
-            }, 1000);
-            
-        } catch (error) {
-            // Error handling
-            submitBtn.querySelector('.btn-text').textContent = 'Error - Try again';
-            submitBtn.style.background = 'linear-gradient(135deg, var(--color-error), #ef4444)';
-            
-            setTimeout(() => {
-                submitBtn.disabled = false;
-                submitBtn.style.opacity = '1';
-                submitBtn.querySelector('.btn-text').textContent = originalText;
-                submitBtn.style.background = '';
-            }, 2000);
-            
-            console.error('Login error:', error);
-        }
-    });
-    
-    // Social login buttons (demo handlers)
-    document.querySelectorAll('.social-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const provider = btn.textContent.includes('Google') ? 'Google' : 'GitHub';
-            console.log(`Social login clicked: ${provider}`);
-            alert(`${provider} authentication would be triggered here (demo mode)`);
+
+    if (passwordInput) {
+        passwordInput.addEventListener('input', (e) => {
+            const isValid = validatePassword(e.target.value);
+            updateInputState(e.target, isValid);
         });
-    });
-    
-    // Input focus effects
-    const inputs = document.querySelectorAll('.form-input');
-    inputs.forEach(input => {
-        input.addEventListener('focus', () => {
-            input.closest('.form-group')?.classList.add('focused');
-        });
-        
-        input.addEventListener('blur', () => {
-            input.closest('.form-group')?.classList.remove('focused');
-        });
-    });
-    
-    // Keyboard accessibility
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            document.activeElement?.blur();
-        }
-    });
-    
-    // Add entrance animations on scroll (for mobile)
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
+
+        passwordInput.addEventListener('blur', (e) => {
+            if (e.target.value.length > 0) {
+                const isValid = validatePassword(e.target.value);
+                updateInputState(e.target, isValid);
             }
         });
-    }, observerOptions);
+    }
+
+    // Form submission
+    loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const email = emailInput?.value || '';
+        const password = passwordInput?.value || '';
+        const remember = document.getElementById('remember')?.checked || false;
+
+        // Validate inputs
+        const emailValid = validateEmail(email);
+        const passwordValid = validatePassword(password);
+
+        updateInputState(emailInput, emailValid);
+        updateInputState(passwordInput, passwordValid);
+
+        if (!emailValid || !passwordValid) {
+            showFormError('Please check your credentials');
+            return;
+        }
+
+        // Disable form during submission
+        submitButton.disabled = true;
+        submitButton.querySelector('.btn-label').textContent = 'AUTHENTICATING...';
+
+        // Simulate authentication
+        try {
+            await simulateAuth(email, password, remember);
+            
+            // Success animation
+            submitButton.querySelector('.btn-label').textContent = 'ACCESS GRANTED';
+            submitButton.style.borderColor = 'var(--color-accent)';
+            submitButton.style.background = 'var(--color-accent)';
+            
+            // Update session status
+            updateSessionStatus('AUTHENTICATED');
+            
+            setTimeout(() => {
+                console.log('Login successful!');
+                // In a real app, redirect to dashboard
+                // window.location.href = '/dashboard';
+            }, 1500);
+            
+        } catch (error) {
+            // Error animation
+            submitButton.querySelector('.btn-label').textContent = 'ACCESS DENIED';
+            submitButton.style.borderColor = 'var(--color-warning)';
+            
+            showFormError(error.message);
+            
+            setTimeout(() => {
+                submitButton.disabled = false;
+                submitButton.querySelector('.btn-label').textContent = 'AUTHENTICATE';
+                submitButton.style.borderColor = 'var(--color-accent)';
+            }, 2000);
+        }
+    });
+}
+
+// Helper function to update input validation state
+function updateInputState(input, isValid) {
+    if (!input) return;
     
-    // Observe form groups for staggered animation
-    document.querySelectorAll('.form-group').forEach((group, index) => {
-        group.style.opacity = '0';
-        group.style.transform = 'translateY(20px)';
-        group.style.transition = `all 0.6s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.1}s`;
-        observer.observe(group);
+    const container = input.closest('.input-container');
+    const statusIndicator = container?.querySelector('.status-indicator');
+    
+    if (input.value.length === 0) {
+        // Reset state when empty
+        input.style.borderColor = 'var(--color-border)';
+        if (statusIndicator) {
+            statusIndicator.style.borderColor = 'var(--color-border)';
+            statusIndicator.style.background = 'transparent';
+            statusIndicator.style.boxShadow = 'none';
+        }
+        return;
+    }
+    
+    if (isValid) {
+        input.style.borderColor = 'var(--color-accent)';
+        if (statusIndicator) {
+            statusIndicator.style.borderColor = 'var(--color-accent)';
+            statusIndicator.style.background = 'var(--color-accent)';
+            statusIndicator.style.boxShadow = '0 0 12px var(--color-accent)';
+        }
+    } else {
+        input.style.borderColor = 'var(--color-warning)';
+        if (statusIndicator) {
+            statusIndicator.style.borderColor = 'var(--color-warning)';
+            statusIndicator.style.background = 'transparent';
+            statusIndicator.style.boxShadow = 'none';
+        }
+    }
+}
+
+// Helper function to show form errors
+function showFormError(message) {
+    // Create error message element if it doesn't exist
+    let errorElement = document.querySelector('.form-error');
+    
+    if (!errorElement) {
+        errorElement = document.createElement('div');
+        errorElement.className = 'form-error';
+        errorElement.style.cssText = `
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            padding: 1rem 1.5rem;
+            background: var(--color-surface);
+            border: 2px solid var(--color-warning);
+            color: var(--color-warning);
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            z-index: 10000;
+            animation: slideInRight 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        `;
+        document.body.appendChild(errorElement);
+    }
+    
+    errorElement.textContent = message;
+    errorElement.style.display = 'block';
+    
+    // Auto-hide after 3 seconds
+    setTimeout(() => {
+        errorElement.style.animation = 'slideOutRight 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+        setTimeout(() => {
+            errorElement.style.display = 'none';
+        }, 300);
+    }, 3000);
+}
+
+// Helper function to simulate authentication
+function simulateAuth(email, password, remember) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            // Simulate authentication logic
+            if (email && password.length >= 8) {
+                // Store session data
+                if (remember) {
+                    localStorage.setItem('authToken', 'demo-token-' + Date.now());
+                    localStorage.setItem('userEmail', email);
+                } else {
+                    sessionStorage.setItem('authToken', 'demo-token-' + Date.now());
+                    sessionStorage.setItem('userEmail', email);
+                }
+                resolve({ success: true });
+            } else {
+                reject(new Error('INVALID CREDENTIALS'));
+            }
+        }, 1500);
+    });
+}
+
+// Update session status in status bar
+function updateSessionStatus(status) {
+    const sessionValue = document.querySelector('.status-item:nth-child(2) .status-value');
+    if (sessionValue) {
+        sessionValue.textContent = status;
+        
+        if (status === 'AUTHENTICATED') {
+            sessionValue.style.color = 'var(--color-accent)';
+        }
+    }
+}
+
+// OAuth button handlers
+const oauthButtons = document.querySelectorAll('.oauth-btn');
+
+oauthButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
+        const provider = button.dataset.provider;
+        console.log(`OAuth login initiated with ${provider}`);
+        
+        // Add click animation
+        button.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+            button.style.transform = 'scale(1)';
+        }, 100);
+        
+        // In a real app, initiate OAuth flow
+        showFormError(`${provider.toUpperCase()} AUTH NOT CONFIGURED`);
     });
 });
+
+// Keyboard shortcuts
+document.addEventListener('keydown', (e) => {
+    // Alt + L to focus email input
+    if (e.altKey && e.key === 'l') {
+        e.preventDefault();
+        emailInput?.focus();
+    }
+    
+    // Escape to clear form
+    if (e.key === 'Escape') {
+        if (document.activeElement.tagName === 'INPUT') {
+            document.activeElement.blur();
+        }
+    }
+});
+
+// Add CSS for error animations
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideInRight {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+    
+    @keyframes slideOutRight {
+        from {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(style);
+
+// Check for existing session on page load
+window.addEventListener('DOMContentLoaded', () => {
+    const authToken = localStorage.getItem('authToken') || sessionStorage.getItem('authToken');
+    const userEmail = localStorage.getItem('userEmail') || sessionStorage.getItem('userEmail');
+    
+    if (authToken && userEmail) {
+        console.log('Existing session found:', userEmail);
+        updateSessionStatus('ACTIVE');
+        
+        // Auto-fill email if remembered
+        if (emailInput && userEmail) {
+            emailInput.value = userEmail;
+        }
+    }
+});
+
+// Enhance form with Enter key support
+if (emailInput) {
+    emailInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            passwordInput?.focus();
+        }
+    });
+}
+
+// Add focus animations
+const allInputs = document.querySelectorAll('.form-input');
+
+allInputs.forEach(input => {
+    input.addEventListener('focus', () => {
+        const container = input.closest('.input-container');
+        container?.classList.add('focused');
+    });
+    
+    input.addEventListener('blur', () => {
+        const container = input.closest('.input-container');
+        container?.classList.remove('focused');
+    });
+});
+
+console.log('Login page initialized');
+console.log('Keyboard shortcuts:');
+console.log('- Alt + L: Focus email input');
+console.log('- Enter: Navigate to next field');
+console.log('- Escape: Blur current input');

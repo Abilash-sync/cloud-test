@@ -3,133 +3,211 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign In</title>
+    <title>Authentication Portal</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Space+Mono:wght@400;700&family=Unbounded:wght@200;300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="login.css">
 </head>
 <body>
-    <div class="background-grid"></div>
-    <div class="floating-shapes">
-        <div class="shape shape-1"></div>
-        <div class="shape shape-2"></div>
-        <div class="shape shape-3"></div>
-    </div>
+    <div class="grain-overlay"></div>
     
-    <main class="login-wrapper">
-        <div class="login-card">
-            <div class="card-header">
-                <div class="logo-mark">
-                    <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="4" y="4" width="14" height="14" fill="currentColor" opacity="0.9"/>
-                        <rect x="22" y="4" width="14" height="14" fill="currentColor" opacity="0.6"/>
-                        <rect x="4" y="22" width="14" height="14" fill="currentColor" opacity="0.6"/>
-                        <rect x="22" y="22" width="14" height="14" fill="currentColor" opacity="0.3"/>
-                    </svg>
-                </div>
-                <h1 class="title">Welcome back</h1>
-                <p class="subtitle">Enter your credentials to continue</p>
+    <div class="geometric-bg">
+        <div class="geo-shape geo-1"></div>
+        <div class="geo-shape geo-2"></div>
+        <div class="geo-shape geo-3"></div>
+        <div class="geo-line line-1"></div>
+        <div class="geo-line line-2"></div>
+        <div class="geo-line line-3"></div>
+    </div>
+
+    <main class="container">
+        <div class="status-bar">
+            <div class="status-item">
+                <span class="status-label">STATUS</span>
+                <span class="status-value">ACTIVE</span>
             </div>
-            
-            <form class="login-form" id="loginForm">
-                <div class="form-group">
-                    <label for="email" class="form-label">Email address</label>
-                    <div class="input-wrapper">
-                        <input 
-                            type="email" 
-                            id="email" 
-                            name="email" 
-                            class="form-input"
-                            placeholder="you@example.com"
-                            required
-                            autocomplete="email"
-                        >
-                        <div class="input-focus-border"></div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <div class="label-row">
-                        <label for="password" class="form-label">Password</label>
-                        <a href="#" class="forgot-link">Forgot?</a>
-                    </div>
-                    <div class="input-wrapper">
-                        <input 
-                            type="password" 
-                            id="password" 
-                            name="password" 
-                            class="form-input"
-                            placeholder="••••••••"
-                            required
-                            autocomplete="current-password"
-                        >
-                        <div class="input-focus-border"></div>
-                        <button type="button" class="toggle-password" aria-label="Toggle password visibility">
-                            <svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                <circle cx="12" cy="12" r="3"></circle>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="form-group checkbox-group">
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="remember" id="remember">
-                        <span class="checkbox-custom"></span>
-                        <span class="checkbox-text">Keep me signed in</span>
-                    </label>
-                </div>
-                
-                <button type="submit" class="submit-btn">
-                    <span class="btn-text">Sign in</span>
-                    <span class="btn-icon">→</span>
-                </button>
-            </form>
-            
-            <div class="card-footer">
-                <div class="divider">
-                    <span>or</span>
-                </div>
-                
-                <div class="social-login">
-                    <button type="button" class="social-btn">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-                        </svg>
-                        Continue with Google
-                    </button>
-                    
-                    <button type="button" class="social-btn">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
-                        </svg>
-                        Continue with GitHub
-                    </button>
-                </div>
-                
-                <p class="signup-text">
-                    Don't have an account? <a href="#" class="signup-link">Sign up</a>
-                </p>
+            <div class="status-item">
+                <span class="status-label">SESSION</span>
+                <span class="status-value">INITIALIZING</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">TIME</span>
+                <span class="status-value" id="currentTime">00:00:00</span>
             </div>
         </div>
-        
-        <div class="info-panel">
-            <div class="quote-mark">"</div>
-            <blockquote class="testimonial">
-                <p class="quote-text">This platform has transformed how our team collaborates. The seamless integration and intuitive design make it indispensable.</p>
-                <footer class="quote-author">
-                    <div class="author-avatar"></div>
-                    <div class="author-info">
-                        <cite class="author-name">Sarah Chen</cite>
-                        <span class="author-title">Product Lead, TechCorp</span>
+
+        <div class="login-wrapper">
+            <div class="login-box">
+                <div class="corner-mark corner-tl"></div>
+                <div class="corner-mark corner-tr"></div>
+                <div class="corner-mark corner-bl"></div>
+                <div class="corner-mark corner-br"></div>
+
+                <header class="login-header">
+                    <div class="logo-container">
+                        <div class="logo-grid">
+                            <div class="logo-cell"></div>
+                            <div class="logo-cell"></div>
+                            <div class="logo-cell"></div>
+                            <div class="logo-cell"></div>
+                        </div>
+                    </div>
+                    <h1 class="main-title">
+                        <span class="title-line">ACCESS</span>
+                        <span class="title-line">CONTROL</span>
+                    </h1>
+                    <div class="system-info">
+                        <span class="sys-code">#SYS-AUTH-2024</span>
+                        <span class="sys-separator">●</span>
+                        <span class="sys-label">SECURE PORTAL</span>
+                    </div>
+                </header>
+
+                <form class="login-form" id="loginForm">
+                    <div class="form-section">
+                        <label for="email" class="field-label">
+                            <span class="label-number">[01]</span>
+                            <span class="label-text">EMAIL ADDRESS</span>
+                        </label>
+                        <div class="input-container">
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                class="form-input"
+                                placeholder="user@domain.com"
+                                required
+                                autocomplete="email"
+                            >
+                            <div class="input-border"></div>
+                            <div class="input-status">
+                                <span class="status-indicator"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <label for="password" class="field-label">
+                            <span class="label-number">[02]</span>
+                            <span class="label-text">SECURITY KEY</span>
+                        </label>
+                        <div class="input-container">
+                            <input 
+                                type="password" 
+                                id="password" 
+                                name="password" 
+                                class="form-input"
+                                placeholder="••••••••••••"
+                                required
+                                autocomplete="current-password"
+                            >
+                            <div class="input-border"></div>
+                            <button type="button" class="toggle-visibility" aria-label="Toggle password visibility">
+                                <span class="toggle-icon" id="toggleIcon">◉</span>
+                            </button>
+                            <div class="input-status">
+                                <span class="status-indicator"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-options">
+                        <label class="checkbox-container">
+                            <input type="checkbox" name="remember" id="remember">
+                            <span class="checkbox-mark"></span>
+                            <span class="checkbox-label">MAINTAIN SESSION</span>
+                        </label>
+                        <a href="#" class="recovery-link">RECOVERY</a>
+                    </div>
+
+                    <button type="submit" class="submit-button">
+                        <span class="btn-bg"></span>
+                        <span class="btn-content">
+                            <span class="btn-label">AUTHENTICATE</span>
+                            <span class="btn-arrow">→</span>
+                        </span>
+                        <div class="btn-corners">
+                            <span class="btn-corner"></span>
+                            <span class="btn-corner"></span>
+                            <span class="btn-corner"></span>
+                            <span class="btn-corner"></span>
+                        </div>
+                    </button>
+                </form>
+
+                <footer class="login-footer">
+                    <div class="divider">
+                        <span class="divider-text">ALTERNATIVE ACCESS</span>
+                    </div>
+
+                    <div class="oauth-grid">
+                        <button type="button" class="oauth-btn" data-provider="google">
+                            <span class="oauth-icon">G</span>
+                            <span class="oauth-label">GOOGLE</span>
+                        </button>
+                        <button type="button" class="oauth-btn" data-provider="github">
+                            <span class="oauth-icon">H</span>
+                            <span class="oauth-label">GITHUB</span>
+                        </button>
+                    </div>
+
+                    <div class="register-prompt">
+                        <span class="prompt-text">NEW USER?</span>
+                        <a href="#" class="register-link">CREATE ACCOUNT</a>
                     </div>
                 </footer>
-            </blockquote>
+            </div>
+
+            <aside class="info-panel">
+                <div class="panel-content">
+                    <div class="info-badge">
+                        <span class="badge-icon">✦</span>
+                        <span class="badge-text">SYSTEM INFO</span>
+                    </div>
+                    
+                    <div class="info-blocks">
+                        <div class="info-block">
+                            <div class="block-header">
+                                <span class="block-number">01</span>
+                                <span class="block-title">SECURE</span>
+                            </div>
+                            <p class="block-text">End-to-end encrypted authentication with multi-factor verification protocols</p>
+                        </div>
+
+                        <div class="info-block">
+                            <div class="block-header">
+                                <span class="block-number">02</span>
+                                <span class="block-title">RELIABLE</span>
+                            </div>
+                            <p class="block-text">99.9% uptime with redundant infrastructure across global data centers</p>
+                        </div>
+
+                        <div class="info-block">
+                            <div class="block-header">
+                                <span class="block-number">03</span>
+                                <span class="block-title">COMPLIANT</span>
+                            </div>
+                            <p class="block-text">SOC 2 Type II certified with GDPR and HIPAA compliance standards</p>
+                        </div>
+                    </div>
+
+                    <div class="metrics-display">
+                        <div class="metric">
+                            <div class="metric-value">24/7</div>
+                            <div class="metric-label">MONITORING</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">256-bit</div>
+                            <div class="metric-label">ENCRYPTION</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">2FA</div>
+                            <div class="metric-label">SECURITY</div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
         </div>
     </main>
 
