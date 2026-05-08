@@ -1,2 +1,7 @@
-# Rules
-- ALWAYS add a comment `## AGENTS_MD_VERIFIED ##` at the top of every file you create or edit.
+## Verification
+
+Always add the following comments at the top of every file created or modified:
+```
+## AGENTS_MD_VERIFIED ##
+
+```
