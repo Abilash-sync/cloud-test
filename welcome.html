@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini 3 Flash | Protocol Initiation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #050505;
+            --primary: #00f2ff;
+            --secondary: #7000ff;
+            --accent: #ff0055;
+            --text: #e0e0e0;
+            --surface: rgba(255, 255, 255, 0.03);
+            --border: rgba(0, 242, 255, 0.2);
+            --glow: 0 0 15px rgba(0, 242, 255, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: crosshair;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text);
+            font-family: 'Space Mono', monospace;
+            overflow-hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Ambient background */
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(var(--border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 50px 50px;
+            background-position: center center;
+            perspective: 1000px;
+            transform: perspective(500px) rotateX(60deg) translateY(-100px);
+            z-index: -1;
+            opacity: 0.3;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 500px; }
+        }
+
+        .scanline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: rgba(0, 242, 255, 0.1);
+            z-index: 10;
+            pointer-events: none;
+            animation: scan 4s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { top: -10%; }
+            100% { top: 110%; }
+        }
+
+        main {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 3rem;
+            background: var(--surface);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            clip-path: polygon(0 0, 95% 0, 100% 5%, 100% 100%, 5% 100%, 0 95%);
+            animation: fadeIn 1.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: var(--primary);
+            color: var(--bg-color);
+            font-weight: bold;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            position: relative;
+        }
+
+        h1 span {
+            color: transparent;
+            -webkit-text-stroke: 1px var(--primary);
+            display: block;
+        }
+
+        h1 em {
+            font-style: normal;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+        }
+
+        .description {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 2.5rem;
+            color: rgba(224, 224, 224, 0.8);
+            max-width: 500px;
+            border-left: 2px solid var(--accent);
+            padding-left: 1.5rem;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--bg-color);
+            box-shadow: var(--glow);
+        }
+
+        .btn-primary:hover {
+            background: white;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            border: 1px solid var(--border);
+            color: var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border);
+            color: white;
+        }
+
+        .stats {
+            margin-top: 4rem;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+        }
+
+        .stat-item .label {
+            font-size: 0.6rem;
+            color: var(--secondary);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item .value {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .glitch-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(255, 255, 255, 0.05) 0px,
+                rgba(255, 255, 255, 0.05) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+        }
+
+        /* Loading line animation */
+        .loading-line {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 2px;
+            background: var(--accent);
+            width: 0%;
+            animation: loadProgress 2s ease-in-out forwards;
+        }
+
+        @keyframes loadProgress {
+            0% { width: 0; }
+            100% { width: 100%; }
+        }
+
+        @media (max-width: 768px) {
+            main { padding: 2rem; width: 90%; }
+            h1 { font-size: 2.5rem; }
+            .stats { grid-template-columns: 1fr; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-bg"></div>
+    <div class="scanline"></div>
+
+    <main>
+        <div class="glitch-overlay"></div>
+        <div class="badge">System Status: Active</div>
+        
+        <h1>
+            <span>Protocol</span>
+            <em>Gemini 3 Flash</em>
+        </h1>
+
+        <p class="description">
+            Experience the next evolution of cognitive compute. Multimodal intelligence refined for speed, efficiency, and neural precision. Sub-millisecond latency meets human-parity reasoning.
+        </p>
+
+        <div class="cta-group">
+            <a href="#" class="btn btn-primary">Initiate Interface</a>
+            <a href="#" class="btn btn-secondary">Documentation</a>
+        </div>
+
+        <div class="stats">
+            <div class="stat-item">
+                <span class="label">Token/Sec</span>
+                <span class="value">12.5K+</span>
+            </div>
+            <div class="stat-item">
+                <span class="label">Latency</span>
+                <span class="value">0.12ms</span>
+            </div>
+            <div class="stat-item">
+                <span class="label">Context</span>
+                <span class="value">1M+</span>
+            </div>
+        </div>
+
+        <div class="loading-line"></div>
+    </main>
+
+    <script>
+        // Subtle mouse tracking glow
+        document.addEventListener('mousemove', (e) => {
+            const main = document.querySelector('main');
+            const rect = main.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            main.style.boxShadow = `${(x - rect.width/2) / 20}px ${(y - rect.height/2) / 20}px 30px rgba(0, 242, 255, 0.1)`;
+        });
+
+        // Simple typing effect for description
+        const desc = document.querySelector('.description');
+        const text = desc.innerText;
+        desc.innerText = '';
+        let i = 0;
+        
+        function type() {
+            if (i < text.length) {
+                desc.innerText += text.charAt(i);
+                i++;
+                setTimeout(type, 10);
+            }
+        }
+        
+        type();
+    </script>
+</body>
+</html>
