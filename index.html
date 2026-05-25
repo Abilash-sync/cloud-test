@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sales Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
+  <!-- Date adapter for Chart.js time scale -->
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="app-header">
+    <h1>Sales Dashboard</h1>
+    <div class="header-actions">
+      <button id="exportCsvBtn" class="btn">Export CSV</button>
+      <button id="resetFiltersBtn" class="btn btn-secondary">Reset Filters</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="filters" aria-label="Filters">
+      <div class="filter-group">
+        <label for="dateFrom">From</label>
+        <input type="date" id="dateFrom" />
+      </div>
+      <div class="filter-group">
+        <label for="dateTo">To</label>
+        <input type="date" id="dateTo" />
+      </div>
+      <div class="filter-group">
+        <label for="regionSelect">Region</label>
+        <select id="regionSelect">
+          <option value="all" selected>All</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="categorySelect">Category</label>
+        <select id="categorySelect">
+          <option value="all" selected>All</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="searchInput">Search (product)</label>
+        <input id="searchInput" type="search" placeholder="Search products..." />
+      </div>
+    </section>
+
+    <section class="kpis" aria-label="Key Performance Indicators">
+      <div class="kpi-card">
+        <div class="kpi-label">Revenue</div>
+        <div class="kpi-value" id="kpiRevenue">$0</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Orders</div>
+        <div class="kpi-value" id="kpiOrders">0</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Units Sold</div>
+        <div class="kpi-value" id="kpiUnits">0</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Avg Order Value</div>
+        <div class="kpi-value" id="kpiAov">$0</div>
+      </div>
+    </section>
+
+    <section class="charts">
+      <div class="card">
+        <div class="card-header">
+          <h2>Revenue Over Time</h2>
+        </div>
+        <div class="card-body">
+          <canvas id="revenueOverTime"></canvas>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h2>Revenue by Category</h2>
+        </div>
+        <div class="card-body">
+          <canvas id="revenueByCategory"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <section class="table-section">
+      <div class="card">
+        <div class="card-header">
+          <h2>Orders</h2>
+        </div>
+        <div class="card-body table-wrapper">
+          <table id="ordersTable">
+            <thead>
+              <tr>
+                <th data-key="date">Date</th>
+                <th data-key="region">Region</th>
+                <th data-key="category">Category</th>
+                <th data-key="product">Product</th>
+                <th data-key="quantity">Qty</th>
+                <th data-key="price">Price</th>
+                <th data-key="revenue">Revenue</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <span>Demo dashboard — vanilla JS + Chart.js</span>
+  </footer>
+</body>
+</html>
