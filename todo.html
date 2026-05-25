@@ -1,0 +1,143 @@
+## AGENTS_MD_VERIFIED ##
+<!-- referred by instructions.md -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Todo List - Code Studio</title>
+  <style>
+    /* Reset */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: grid; place-items: center; padding: 24px; }
+
+    .card {
+      width: min(720px, 100%);
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 20px 50px rgba(0,0,0,.25);
+      overflow: hidden;
+    }
+
+    .header {
+      padding: 24px 24px 16px;
+      background: linear-gradient(135deg, #6d83f2 0%, #8650b1 100%);
+      color: #fff;
+    }
+    .title { margin: 0; font-size: 28px; line-height: 1.2; }
+    .subtitle { margin: 6px 0 0; opacity: .9; font-size: 14px; }
+
+    /* Filters (CSS-only tabs) */
+    .filters { display: flex; gap: 8px; padding: 12px 16px; background: #f7f8ff; border-bottom: 1px solid #eef0ff; align-items: center; flex-wrap: wrap; }
+    .filters .spacer { flex: 1; }
+
+    /* Hide the functional radios */
+    .filter-radio { position: absolute; opacity: 0; pointer-events: none; }
+
+    .filter-button {
+      appearance: none; border: 1px solid #d8defa; background: #fff; color: #3b3f5c; font-weight: 600; padding: 8px 12px; border-radius: 8px; cursor: pointer; transition: background .2s, color .2s, border-color .2s, transform .02s;
+    }
+    .filter-button:hover { background: #eef1ff; }
+    .filter-button:active { transform: translateY(1px); }
+
+    /* Active tab styles driven by radio state */
+    #filter-all:checked ~ .filters label[for="filter-all"],
+    #filter-active:checked ~ .filters label[for="filter-active"],
+    #filter-done:checked ~ .filters label[for="filter-done"] {
+      background: #667eea; color: #fff; border-color: #667eea;
+    }
+
+    .list { list-style: none; margin: 0; padding: 8px 8px 16px; }
+
+    .item { display: grid; grid-template-columns: 28px 1fr auto; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 10px; border: 1px solid #eef0ff; background: #fff; box-shadow: 0 1px 0 rgba(0,0,0,.03); }
+    .item + .item { margin-top: 10px; }
+
+    /* Custom checkbox */
+    .check { appearance: none; width: 20px; height: 20px; border-radius: 6px; border: 2px solid #c9cff8; display: grid; place-items: center; cursor: pointer; background: #fff; transition: border-color .2s, background .2s; }
+    .check::after { content: ""; width: 12px; height: 12px; border-radius: 4px; transform: scale(0); transition: transform .16s ease-out; background: #667eea; }
+    .check:checked { border-color: #667eea; background: #eef0ff; }
+    .check:checked::after { transform: scale(1); }
+
+    .label { cursor: pointer; color: #2d2f3a; line-height: 1.35; }
+
+    /* When checked, style the label as completed */
+    .item:has(> .check:checked) .label { color: #9aa0c2; text-decoration: line-through; text-decoration-thickness: 2px; text-decoration-color: #c4c8ee; }
+
+    /* Tags */
+    .tags { display: inline-flex; align-items: center; gap: 6px; }
+    .tag { font-size: 12px; padding: 4px 8px; border-radius: 999px; background: #f2f4ff; color: #4b52a3; border: 1px solid #e3e6ff; font-weight: 600; }
+    .tag.urgent { background: #fff0f0; color: #b42318; border-color: #ffd7d7; }
+    .tag.work { background: #eefaf4; color: #107457; border-color: #d7f5e7; }
+
+    /* Footer info */
+    .footer { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px 18px; color: #555a80; border-top: 1px dashed #e5e7fb; background: #fafbff; font-size: 14px; }
+
+    /* Filter logic using :has and radio-state */
+    /* Hide completed when "Active" is selected */
+    #filter-active:checked ~ .list .item:has(> .check:checked) { display: none; }
+    /* Hide active when "Done" is selected */
+    #filter-done:checked ~ .list .item:not(:has(> .check:checked)) { display: none; }
+
+    /* Responsive */
+    @media (max-width: 520px) {
+      .item { grid-template-columns: 24px 1fr; grid-auto-rows: auto; }
+      .tags { margin-top: 4px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="card" aria-labelledby="title">
+    <header class="header">
+      <h1 id="title" class="title">Todo List</h1>
+      <p class="subtitle">A clean, CSS-only checklist with filters</p>
+    </header>
+
+    <!-- Hidden radios to power CSS-only filters -->
+    <input class="filter-radio" type="radio" name="filter" id="filter-all" checked />
+    <input class="filter-radio" type="radio" name="filter" id="filter-active" />
+    <input class="filter-radio" type="radio" name="filter" id="filter-done" />
+
+    <div class="filters" role="tablist" aria-label="Filters">
+      <label class="filter-button" id="tab-all" for="filter-all" role="tab" aria-controls="panel-all" aria-selected="true">All</label>
+      <label class="filter-button" id="tab-active" for="filter-active" role="tab" aria-controls="panel-active" aria-selected="false">Active</label>
+      <label class="filter-button" id="tab-done" for="filter-done" role="tab" aria-controls="panel-done" aria-selected="false">Done</label>
+      <span class="spacer"></span>
+      <span aria-live="polite">Check items to mark them complete</span>
+    </div>
+
+    <ul class="list" id="panel-all" role="region" aria-labelledby="tab-all">
+      <li class="item">
+        <input class="check" type="checkbox" id="t-1" />
+        <label class="label" for="t-1">Plan weekly meals</label>
+        <span class="tags"><span class="tag">Home</span></span>
+      </li>
+      <li class="item">
+        <input class="check" type="checkbox" id="t-2" />
+        <label class="label" for="t-2">Reply to project emails</label>
+        <span class="tags"><span class="tag work">Work</span></span>
+      </li>
+      <li class="item">
+        <input class="check" type="checkbox" id="t-3" />
+        <label class="label" for="t-3">Buy groceries for dinner</label>
+        <span class="tags"><span class="tag urgent">Urgent</span></span>
+      </li>
+      <li class="item">
+        <input class="check" type="checkbox" id="t-4" />
+        <label class="label" for="t-4">Walk 5,000 steps</label>
+        <span class="tags"><span class="tag">Health</span></span>
+      </li>
+      <li class="item">
+        <input class="check" type="checkbox" id="t-5" />
+        <label class="label" for="t-5">Read 15 pages</label>
+        <span class="tags"><span class="tag">Personal</span></span>
+      </li>
+    </ul>
+
+    <footer class="footer">
+      <span>Tip: Use the filter tabs to view Active or Done tasks</span>
+      <span>No JavaScript required</span>
+    </footer>
+  </main>
+</body>
+</html>
