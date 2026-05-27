@@ -1,0 +1,190 @@
+<!-- ## This is from .github/instruction folder -->
+<!-- ## instruction from claud rules ##. -->
+<!-- ## This is from .codestudio/instruction folder  -->
+<!-- ## AGENTS_MD_VERIFIED ## -->
+<!-- referred by instructions.md -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sample HTML Page</title>
+    <meta name="description" content="A clean, accessible starter HTML page." />
+    <style>
+      :root {
+        --bg: #0b0c0f;
+        --panel: #14161a;
+        --text: #e6e6e6;
+        --muted: #a8b0b9;
+        --brand: #5b9cff;
+        --brand-strong: #2b7bff;
+        --ring: 2px solid rgba(91, 156, 255, 0.6);
+      }
+
+      @media (prefers-color-scheme: light) {
+        :root {
+          --bg: #f8fafc;
+          --panel: #ffffff;
+          --text: #0f172a;
+          --muted: #475569;
+          --brand: #2563eb;
+          --brand-strong: #1d4ed8;
+          --ring: 2px solid rgba(37, 99, 235, 0.35);
+        }
+      }
+
+      * { box-sizing: border-box; }
+      html, body { height: 100%; }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        background: radial-gradient(1200px 600px at 80% -100px, rgba(91, 156, 255, 0.18), transparent 45%), var(--bg);
+        color: var(--text);
+        line-height: 1.55;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        min-height: 100dvh;
+      }
+
+      .container {
+        width: min(1100px, 92vw);
+        margin-inline: auto;
+        padding: 24px 0;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        backdrop-filter: saturate(160%) blur(8px);
+        background: color-mix(in oklab, var(--bg) 86%, transparent);
+        border-bottom: 1px solid color-mix(in oklab, var(--text) 12%, transparent);
+        z-index: 10;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 700;
+        letter-spacing: 0.2px;
+      }
+
+      .badge {
+        font-size: 12px;
+        color: var(--brand);
+        border: 1px solid color-mix(in oklab, var(--brand) 60%, transparent);
+        padding: 2px 8px;
+        border-radius: 999px;
+      }
+
+      main .hero {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 28px;
+        align-items: center;
+        padding: 44px 0 36px;
+      }
+
+      @media (max-width: 900px) {
+        main .hero { grid-template-columns: 1fr; padding-top: 28px; }
+      }
+
+      h1 {
+        margin: 0 0 10px;
+        font-size: clamp(28px, 4.5vw, 44px);
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+      }
+
+      p.lead {
+        margin: 0 0 18px;
+        color: var(--muted);
+        font-size: clamp(15px, 2.2vw, 18px);
+      }
+
+      .panel {
+        background: linear-gradient(180deg, color-mix(in oklab, var(--panel) 92%, transparent) 0%, var(--panel) 60%);
+        border: 1px solid color-mix(in oklab, var(--text) 10%, transparent);
+        border-radius: 14px;
+        padding: 18px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.03);
+      }
+
+      code.sample {
+        display: block;
+        background: #0b0d12;
+        color: #e2e8f0;
+        padding: 14px 16px;
+        border-radius: 10px;
+        overflow-x: auto;
+        border: 1px solid color-mix(in oklab, var(--text) 10%, transparent);
+      }
+
+      a.button, button.button {
+        appearance: none;
+        border: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: linear-gradient(180deg, color-mix(in oklab, var(--brand) 96%, white 4%), var(--brand-strong));
+        color: white;
+        padding: 12px 16px;
+        border-radius: 12px;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+        box-shadow: 0 10px 22px color-mix(in oklab, var(--brand) 35%, transparent);
+      }
+      a.button:focus-visible, button.button:focus-visible { outline: var(--ring); outline-offset: 3px; }
+      a.button:hover, button.button:hover { filter: brightness(1.05); transform: translateY(-1px); }
+      a.button:active, button.button:active { transform: translateY(0); filter: brightness(0.98); }
+
+      .meta {
+        margin-top: 16px;
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      footer {
+        border-top: 1px solid color-mix(in oklab, var(--text) 12%, transparent);
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container" role="banner" aria-label="Site header">
+        <div class="brand">
+          <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M12 3l8.66 5v8L12 21 3.34 16V8L12 3z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+            <circle cx="12" cy="12" r="2.4" fill="currentColor"/>
+          </svg>
+          <span>Starter Page</span>
+          <span class="badge" aria-label="status badge">Template</span>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="container hero">
+        <section>
+          <h1>Modern, accessible starter HTML</h1>
+          <p class="lead">A minimal page scaffold with sensible defaults, responsive layout, and a touch of style you can extend.</p>
+          <a class="button" href="#get-started">Get started</a>
+          <p class="meta">Edit this file at <code>index.html</code>. Keyboard tip: press Tab to focus the button, Space/Enter to activate.</p>
+        </section>
+        <aside class="panel" aria-label="Quick example">
+          <strong>Quick example</strong>
+          <code class="sample" aria-label="HTML sample snippet">&lt;button class=&quot;button&quot;&gt;Click me&lt;/button&gt;</code>
+          <p class="meta">Prefer semantic HTML. Add ARIA labels only when native semantics aren’t sufficient.</p>
+        </aside>
+      </div>
+    </main>
+
+    <footer>
+      <div class="container" role="contentinfo">
+        <small>Built with plain HTML + CSS. Ready to adapt for your project.</small>
+      </div>
+    </footer>
+  </body>
+</html>
