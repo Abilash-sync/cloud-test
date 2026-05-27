@@ -4,6 +4,7 @@
 ## File Creation Rule
 When creating any new file using the write_file tool, you MUST add the following
 comment as the very first line of the file:
+- for all file ## This is from .github/instruction folder 
 - For TypeScript/JavaScript files: `// referred by instructions.md`
 - For Python files: `# referred by instructions.md`
 - For C# files: `// referred by instructions.md`
