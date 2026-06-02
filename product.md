@@ -11,3 +11,6 @@ This document provides a brief overview of the product associated with this repo
 
 ## Notes
 - Update this file with detailed product information (features, roadmap, support) as needed.
+
+## Microsoft Word
+- This documentation can also be authored or exported using Microsoft Word.
