@@ -2,6 +2,6 @@
 
 Always add the following comments at the top of every file created or modified:
 ```
- ## This is from .github/instruction.md  
+ ## This is from .codestudio/codestudio-instructions.md  
 
 ```
