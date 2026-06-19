@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Status - Code Studio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .status-container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .status-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .status-header h1 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .status-header p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .overall-status {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .overall-status.healthy {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+
+        .overall-status.warning {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .overall-status.error {
+            background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
+        }
+
+        .overall-status h2 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .overall-status p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .status-items {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+        }
+
+        .status-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-color: #667eea;
+        }
+
+        .status-item-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .status-icon {
+            font-size: 24px;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-weight: bold;
+        }
+
+        .status-icon.healthy {
+            background: #e8f5e9;
+            color: #4caf50;
+        }
+
+        .status-icon.warning {
+            background: #fff3e0;
+            color: #ff9800;
+        }
+
+        .status-icon.error {
+            background: #ffebee;
+            color: #f44336;
+        }
+
+        .status-icon.checking {
+            background: #e3f2fd;
+            color: #2196f3;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .status-item-details h3 {
+            color: #333;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .status-item-details p {
+            color: #666;
+            font-size: 13px;
+        }
+
+        .status-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-badge.healthy {
+            background: #e8f5e9;
+            color: #4caf50;
+        }
+
+        .status-badge.warning {
+            background: #fff3e0;
+            color: #ff9800;
+        }
+
+        .status-badge.error {
+            background: #ffebee;
+            color: #f44336;
+        }
+
+        .status-badge.checking {
+            background: #e3f2fd;
+            color: #2196f3;
+        }
+
+        .status-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .refresh-button {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .refresh-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .refresh-button:active {
+            transform: translateY(0);
+        }
+
+        .refresh-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .auto-refresh-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: white;
+            border: 2px solid #667eea;
+            color: #667eea;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .auto-refresh-toggle:hover {
+            background: #f5f5f5;
+        }
+
+        .auto-refresh-toggle.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .last-updated {
+            text-align: center;
+            margin-top: 20px;
+            color: #999;
+            font-size: 13px;
+        }
+
+        .rotate {
+            animation: rotate 1s linear infinite;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .status-container {
+                padding: 30px 20px;
+            }
+
+            .status-header h1 {
+                font-size: 24px;
+            }
+
+            .status-actions {
+                flex-direction: column;
+            }
+
+            .refresh-button,
+            .auto-refresh-toggle {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="status-container">
+        <div class="status-header">
+            <h1>System Status</h1>
+            <p>Real-time monitoring of all services</p>
+        </div>
+
+        <div class="overall-status" id="overallStatus">
+            <h2>🔍 Checking Systems...</h2>
+            <p>Running system diagnostics</p>
+        </div>
+
+        <div class="status-items" id="statusItems">
+            <div class="status-item">
+                <div class="status-item-info">
+                    <div class="status-icon checking">⟳</div>
+                    <div class="status-item-details">
+                        <h3>Database Connection</h3>
+                        <p>PostgreSQL primary instance</p>
+                    </div>
+                </div>
+                <span class="status-badge checking">Checking</span>
+            </div>
+
+            <div class="status-item">
+                <div class="status-item-info">
+                    <div class="status-icon checking">⟳</div>
+                    <div class="status-item-details">
+                        <h3>API Service</h3>
+                        <p>REST API endpoints</p>
+                    </div>
+                </div>
+                <span class="status-badge checking">Checking</span>
+            </div>
+
+            <div class="status-item">
+                <div class="status-item-info">
+                    <div class="status-icon checking">⟳</div>
+                    <div class="status-item-details">
+                        <h3>Authentication Service</h3>
+                        <p>OAuth 2.0 and JWT tokens</p>
+                    </div>
+                </div>
+                <span class="status-badge checking">Checking</span>
+            </div>
+
+            <div class="status-item">
+                <div class="status-item-info">
+                    <div class="status-icon checking">⟳</div>
+                    <div class="status-item-details">
+                        <h3>File Storage</h3>
+                        <p>S3-compatible object storage</p>
+                    </div>
+                </div>
+                <span class="status-badge checking">Checking</span>
+            </div>
+
+            <div class="status-item">
+                <div class="status-item-info">
+                    <div class="status-icon checking">⟳</div>
+                    <div class="status-item-details">
+                        <h3>Email Service</h3>
+                        <p>SMTP and notification system</p>
+                    </div>
+                </div>
+                <span class="status-badge checking">Checking</span>
+            </div>
+
+            <div class="status-item">
+                <div class="status-item-info">
+                    <div class="status-icon checking">⟳</div>
+                    <div class="status-item-details">
+                        <h3>Cache Service</h3>
+                        <p>Redis cache cluster</p>
+                    </div>
+                </div>
+                <span class="status-badge checking">Checking</span>
+            </div>
+        </div>
+
+        <div class="status-actions">
+            <button class="refresh-button" id="refreshButton">
+                <span id="refreshIcon">🔄</span>
+                <span>Refresh Status</span>
+            </button>
+            <button class="auto-refresh-toggle" id="autoRefreshToggle">
+                <span>⏱️</span>
+                <span>Auto-Refresh</span>
+            </button>
+        </div>
+
+        <div class="last-updated" id="lastUpdated">
+            Last updated: Never
+        </div>
+    </div>
+
+    <script>
+        const services = [
+            { name: 'Database Connection', description: 'PostgreSQL primary instance' },
+            { name: 'API Service', description: 'REST API endpoints' },
+            { name: 'Authentication Service', description: 'OAuth 2.0 and JWT tokens' },
+            { name: 'File Storage', description: 'S3-compatible object storage' },
+            { name: 'Email Service', description: 'SMTP and notification system' },
+            { name: 'Cache Service', description: 'Redis cache cluster' }
+        ];
+
+        let autoRefreshEnabled = false;
+        let autoRefreshInterval = null;
+
+        function getStatusIcon(status) {
+            const icons = {
+                healthy: '✓',
+                warning: '⚠',
+                error: '✕',
+                checking: '⟳'
+            };
+            return icons[status] || '?';
+        }
+
+        function getStatusText(status) {
+            const texts = {
+                healthy: 'Healthy',
+                warning: 'Warning',
+                error: 'Error',
+                checking: 'Checking'
+            };
+            return texts[status] || 'Unknown';
+        }
+
+        function simulateStatusCheck() {
+            // Simulate random status for each service (90% healthy, 8% warning, 2% error)
+            const rand = Math.random();
+            if (rand > 0.98) return 'error';
+            if (rand > 0.90) return 'warning';
+            return 'healthy';
+        }
+
+        function updateStatus() {
+            const refreshButton = document.getElementById('refreshButton');
+            const refreshIcon = document.getElementById('refreshIcon');
+            const statusItems = document.getElementById('statusItems');
+            const overallStatus = document.getElementById('overallStatus');
+            const lastUpdated = document.getElementById('lastUpdated');
+
+            // Disable button and add rotation
+            refreshButton.disabled = true;
+            refreshIcon.classList.add('rotate');
+
+            // Set all to checking state
+            statusItems.innerHTML = services.map(service => `
+                <div class="status-item">
+                    <div class="status-item-info">
+                        <div class="status-icon checking">⟳</div>
+                        <div class="status-item-details">
+                            <h3>${service.name}</h3>
+                            <p>${service.description}</p>
+                        </div>
+                    </div>
+                    <span class="status-badge checking">Checking</span>
+                </div>
+            `).join('');
+
+            // Simulate checking delay
+            setTimeout(() => {
+                const statuses = services.map(service => ({
+                    ...service,
+                    status: simulateStatusCheck()
+                }));
+
+                // Count statuses
+                const healthyCount = statuses.filter(s => s.status === 'healthy').length;
+                const warningCount = statuses.filter(s => s.status === 'warning').length;
+                const errorCount = statuses.filter(s => s.status === 'error').length;
+
+                // Update overall status
+                let overallState = 'healthy';
+                let overallText = 'All Systems Operational';
+                let overallIcon = '✓';
+
+                if (errorCount > 0) {
+                    overallState = 'error';
+                    overallText = 'System Issues Detected';
+                    overallIcon = '✕';
+                } else if (warningCount > 0) {
+                    overallState = 'warning';
+                    overallText = 'Minor Issues Detected';
+                    overallIcon = '⚠';
+                }
+
+                overallStatus.className = `overall-status ${overallState}`;
+                overallStatus.innerHTML = `
+                    <h2>${overallIcon} ${overallText}</h2>
+                    <p>${healthyCount} healthy, ${warningCount} warnings, ${errorCount} errors</p>
+                `;
+
+                // Update individual items
+                statusItems.innerHTML = statuses.map(service => `
+                    <div class="status-item">
+                        <div class="status-item-info">
+                            <div class="status-icon ${service.status}">${getStatusIcon(service.status)}</div>
+                            <div class="status-item-details">
+                                <h3>${service.name}</h3>
+                                <p>${service.description}</p>
+                            </div>
+                        </div>
+                        <span class="status-badge ${service.status}">${getStatusText(service.status)}</span>
+                    </div>
+                `).join('');
+
+                // Update last updated time
+                const now = new Date();
+                lastUpdated.textContent = `Last updated: ${now.toLocaleTimeString()}`;
+
+                // Re-enable button
+                refreshButton.disabled = false;
+                refreshIcon.classList.remove('rotate');
+            }, 1500);
+        }
+
+        // Initial status check
+        setTimeout(updateStatus, 500);
+
+        // Refresh button click handler
+        document.getElementById('refreshButton').addEventListener('click', updateStatus);
+
+        // Auto-refresh toggle
+        document.getElementById('autoRefreshToggle').addEventListener('click', function() {
+            autoRefreshEnabled = !autoRefreshEnabled;
+            this.classList.toggle('active');
+
+            if (autoRefreshEnabled) {
+                autoRefreshInterval = setInterval(updateStatus, 30000); // Refresh every 30 seconds
+            } else {
+                if (autoRefreshInterval) {
+                    clearInterval(autoRefreshInterval);
+                    autoRefreshInterval = null;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
