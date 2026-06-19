@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Test - Repository Overview</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .file-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .file-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            border-left: 4px solid #667eea;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .file-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .file-card h3 {
+            color: #667eea;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .file-card p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .file-icon {
+            display: inline-block;
+            margin-right: 8px;
+            font-size: 20px;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .feature-list li {
+            padding: 10px 0;
+            color: #444;
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .feature-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-card .number {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .stat-card .label {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        .code-block pre {
+            margin: 0;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .tech-badge {
+            background: #667eea;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        footer {
+            background: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 Cloud Test - Authentication System</h1>
+            <p>Code Studio Product by Syncfusion Pvt Ltd</p>
+        </header>
+
+        <div class="content">
+            <!-- Project Overview -->
+            <div class="section">
+                <h2>📊 Project Statistics</h2>
+                <div class="stats">
+                    <div class="stat-card">
+                        <div class="number">57</div>
+                        <div class="label">Tests Passing</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number">8</div>
+                        <div class="label">TypeScript Files</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number">4</div>
+                        <div class="label">API Endpoints</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number">100%</div>
+                        <div class="label">JWT Secured</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key Features -->
+            <div class="section">
+                <h2>✨ Key Features</h2>
+                <ul class="feature-list">
+                    <li>User Model with password hashing using bcrypt</li>
+                    <li>JWT-based authentication with token generation and verification</li>
+                    <li>Express.js REST API with authentication routes</li>
+                    <li>Comprehensive test suite with 57 passing tests</li>
+                    <li>TypeScript for type safety and better developer experience</li>
+                    <li>Middleware for protecting routes and user context</li>
+                    <li>In-memory user storage (easily replaceable with database)</li>
+                    <li>Environment-based configuration with .env support</li>
+                </ul>
+            </div>
+
+            <!-- Technology Stack -->
+            <div class="section">
+                <h2>🛠️ Technology Stack</h2>
+                <div class="tech-stack">
+                    <span class="tech-badge">TypeScript</span>
+                    <span class="tech-badge">Node.js</span>
+                    <span class="tech-badge">Express.js</span>
+                    <span class="tech-badge">JWT</span>
+                    <span class="tech-badge">bcryptjs</span>
+                    <span class="tech-badge">Jest</span>
+                    <span class="tech-badge">Supertest</span>
+                    <span class="tech-badge">ts-node</span>
+                </div>
+            </div>
+
+            <!-- File Structure -->
+            <div class="section">
+                <h2>📁 Repository Files</h2>
+                <div class="file-grid">
+                    <div class="file-card">
+                        <h3><span class="file-icon">📄</span>README.md</h3>
+                        <p>Main repository documentation describing the cloud-test project and its ownership by Syncfusion Pvt Ltd.</p>
+                    </div>
+
+                    <div class="file-card">
+                        <h3><span class="file-icon">📖</span>AUTHENTICATION.md</h3>
+                        <p>Comprehensive authentication system documentation covering features, API endpoints, installation, and usage examples.</p>
+                    </div>
+
+                    <div class="file-card">
+                        <h3><span class="file-icon">📝</span>IMPLEMENTATION_SUMMARY.md</h3>
+                        <p>Detailed summary of the authentication implementation with 57 tests, project structure, and design decisions.</p>
+                    </div>
+
+                    <div class="file-card">
+                        <h3><span class="file-icon">🌐</span>login.html</h3>
+                        <p>Beautiful login page with gradient design, form validation, and responsive layout for Code Studio authentication.</p>
+                    </div>
+
+                    <div class="file-card">
+                        <h3><span class="file-icon">📦</span>package.json</h3>
+                        <p>Project dependencies including Express, JWT, bcryptjs, TypeScript, and Jest for testing.</p>
+                    </div>
+
+                    <div class="file-card">
+                        <h3><span class="file-icon">⚙️</span>tsconfig.json</h3>
+                        <p>TypeScript configuration targeting ES2020 with strict mode and source maps enabled.</p>
+                    </div>
+
+                    <div class="file-card">
+                        <h3><span class="file-icon">🧪</span>jest.config.js</h3>
+                        <p>Jest test configuration using ts-jest preset for running TypeScript tests with coverage reporting.</p>
+                    </div>
+
+                    <div class="file-card">
+                        <h3><span class="file-icon">🔧</span>.env.example</h3>
+                        <p>Environment variable template with PORT, JWT_SECRET, JWT_EXPIRY, and NODE_ENV configurations.</p>
+                    </div>
+
+                    <div class="file-card">
+                        <h3><span class="file-icon">💻</span>src/app.ts</h3>
+                        <p>Express application setup with JSON middleware, authentication routes, and health check endpoint.</p>
+                    </div>
+
+                    <div class="file-card">
+                        <h3><span class="file-icon">🚀</span>src/index.ts</h3>
+                        <p>Server entry point that starts the Express application on the configured PORT (default: 3000).</p>
+                    </div>
+
+                    <div class="file-card">
+                        <h3><span class="file-icon">👤</span>src/models/User.ts</h3>
+                        <p>User model with bcrypt password hashing, verification methods, and in-memory storage with CRUD operations.</p>
+                    </div>
+
+                    <div class="file-card">
+                        <h3><span class="file-icon">🔐</span>src/middleware/auth.ts</h3>
+                        <p>JWT middleware for token generation, verification, extraction from headers/cookies, and request authentication.</p>
+                    </div>
+
+                    <div class="file-card">
+                        <h3><span class="file-icon">🛣️</span>src/routes/auth.ts</h3>
+                        <p>Authentication routes: /register, /login, /logout, and /me with validation and error handling.</p>
+                    </div>
+
+                    <div class="file-card">
+                        <h3><span class="file-icon">🧮</span>utils.ts</h3>
+                        <p>Utility functions including a sum function for calculating the sum of two numbers.</p>
+                    </div>
+
+                    <div class="file-card">
+                        <h3><span class="file-icon">↩️</span>REVERT.md</h3>
+                        <p>Git revert documentation for reverting commit 33070d0c99e9c67efea597ea78397de1a86e63b1.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- API Endpoints -->
+            <div class="section">
+                <h2>🔌 API Endpoints</h2>
+                <div class="code-block">
+                    <pre>
+POST /auth/register
+  ├─ Create new user account
+  ├─ Validates email, password (min 6 chars), username
+  ├─ Hashes password with bcrypt
+  └─ Returns user data and JWT token
+
+POST /auth/login
+  ├─ Authenticate with email/password
+  ├─ Verifies credentials against hashed password
+  └─ Returns user data and JWT token
+
+POST /auth/logout (Protected)
+  ├─ Requires valid JWT token
+  ├─ Middleware authenticates user
+  └─ Returns logout confirmation
+
+GET /auth/me (Protected)
+  ├─ Requires valid JWT token
+  ├─ Retrieves current user profile
+  └─ Returns user data (excluding password)
+
+GET /health
+  └─ Health check endpoint (returns status: OK)
+                    </pre>
+                </div>
+            </div>
+
+            <!-- Quick Start -->
+            <div class="section">
+                <h2>🚀 Quick Start</h2>
+                <div class="code-block">
+                    <pre>
+# Install dependencies
+npm install
+
+# Create .env file
+cp .env.example .env
+
+# Run tests (57 tests)
+npm test
+
+# Build TypeScript
+npm run build
+
+# Start development server
+npm run dev
+
+# Start production server
+npm start
+                    </pre>
+                </div>
+            </div>
+
+            <!-- Test Coverage -->
+            <div class="section">
+                <h2>✅ Test Coverage (57 Tests)</h2>
+                <ul class="feature-list">
+                    <li>19 User Model Tests - Constructor, password hashing, verification, CRUD operations</li>
+                    <li>16 JWT Middleware Tests - Token generation, verification, extraction, expiry handling</li>
+                    <li>22 Route Integration Tests - Registration, login, logout, protected routes, validation</li>
+                </ul>
+            </div>
+        </div>
+
+        <footer>
+            <p>Cloud Test Authentication System - Built with TypeScript, Express.js, and JWT</p>
+            <p>© 2024 Syncfusion Pvt Ltd | Code Studio Product</p>
+        </footer>
+    </div>
+
+    <script>
+        // Add click animation to file cards
+        document.querySelectorAll('.file-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 100);
+            });
+        });
+
+        // Console easter egg
+        console.log('%c🚀 Cloud Test Authentication System', 'color: #667eea; font-size: 20px; font-weight: bold;');
+        console.log('%c57 tests passing | TypeScript | JWT Authentication', 'color: #764ba2; font-size: 14px;');
+    </script>
+</body>
+</html>
