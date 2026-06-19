@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Studio - Syncfusion Product</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            color: #333;
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .info-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .info-section h2 {
+            color: #667eea;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .info-section p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .checklist {
+            margin-top: 30px;
+        }
+
+        .checklist h3 {
+            color: #333;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: #f8f9fa;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .checklist-item:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+
+        .checklist-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+
+        .checklist-item label {
+            flex: 1;
+            cursor: pointer;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .checklist-item.checked label {
+            text-decoration: line-through;
+            color: #999;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-left: 10px;
+        }
+
+        .status-indicator.active {
+            background: #28a745;
+        }
+
+        .status-indicator.pending {
+            background: #ffc107;
+        }
+
+        .links {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #e9ecef;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Code Studio</h1>
+            <p>A Product by Syncfusion Pvt Ltd</p>
+        </header>
+
+        <div class="info-section">
+            <h2>About Code Studio</h2>
+            <p>
+                Code Studio is an innovative development platform designed to streamline your coding workflow. 
+                Built by Syncfusion Pvt Ltd, it provides powerful tools and features for modern web development.
+            </p>
+        </div>
+
+        <div class="checklist">
+            <h3>Project Status Checklist</h3>
+            
+            <div class="checklist-item">
+                <input type="checkbox" id="check1" checked>
+                <label for="check1">Repository Initialized</label>
+                <span class="status-indicator active"></span>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="check2" checked>
+                <label for="check2">Login Page Created</label>
+                <span class="status-indicator active"></span>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="check3" checked>
+                <label for="check3">HTML Structure Designed</label>
+                <span class="status-indicator active"></span>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="check4">
+                <label for="check4">Backend Integration</label>
+                <span class="status-indicator pending"></span>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="check5">
+                <label for="check5">Authentication System</label>
+                <span class="status-indicator pending"></span>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="check6">
+                <label for="check6">Deploy to Production</label>
+                <span class="status-indicator pending"></span>
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill">50%</div>
+            </div>
+        </div>
+
+        <div class="links">
+            <a href="login.html" class="btn btn-primary">Go to Login</a>
+            <a href="https://www.syncfusion.com" target="_blank" class="btn btn-secondary">Visit Syncfusion</a>
+        </div>
+    </div>
+
+    <script>
+        // Handle checkbox interactions
+        const checkboxes = document.querySelectorAll('.checklist-item input[type="checkbox"]');
+        const progressFill = document.getElementById('progressFill');
+
+        function updateProgress() {
+            const total = checkboxes.length;
+            const checked = document.querySelectorAll('.checklist-item input[type="checkbox"]:checked').length;
+            const percentage = Math.round((checked / total) * 100);
+            
+            progressFill.style.width = percentage + '%';
+            progressFill.textContent = percentage + '%';
+        }
+
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const item = this.closest('.checklist-item');
+                const indicator = item.querySelector('.status-indicator');
+                
+                if (this.checked) {
+                    item.classList.add('checked');
+                    indicator.classList.remove('pending');
+                    indicator.classList.add('active');
+                } else {
+                    item.classList.remove('checked');
+                    indicator.classList.remove('active');
+                    indicator.classList.add('pending');
+                }
+                
+                updateProgress();
+            });
+        });
+
+        // Initialize checked items
+        checkboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                checkbox.closest('.checklist-item').classList.add('checked');
+            }
+        });
+
+        updateProgress();
+    </script>
+</body>
+</html>
