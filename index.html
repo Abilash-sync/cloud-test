@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Studio - Syncfusion Private Limited</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header Section */
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        header .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            margin-bottom: 10px;
+        }
+
+        header .company {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-style: italic;
+        }
+
+        /* Main Content */
+        .content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 35px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .card h2 {
+            color: #667eea;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card h3 {
+            color: #764ba2;
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            margin-top: 20px;
+        }
+
+        .card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card ul li {
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+            color: #555;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card ul li:last-child {
+            border-bottom: none;
+        }
+
+        .icon {
+            font-size: 1.5rem;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 20px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .cta-button:active {
+            transform: translateY(0);
+        }
+
+        /* Feature Card */
+        .feature-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-left: 4px solid #667eea;
+        }
+
+        /* Repository Stats */
+        .stats {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .stat-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            text-align: center;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .stat-item .number {
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .stat-item .label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: white;
+            margin-top: 40px;
+        }
+
+        footer p {
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5rem;
+            }
+
+            header .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .content {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                flex-direction: column;
+            }
+
+            .card {
+                padding: 25px;
+            }
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 5px 12px;
+            background: #f0f0f0;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #667eea;
+            font-weight: 600;
+            margin-right: 8px;
+            margin-top: 8px;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header>
+            <h1>🎨 Code Studio</h1>
+            <p class="subtitle">Professional Web Development Platform</p>
+            <p class="company">A Product of Syncfusion Private Limited</p>
+        </header>
+
+        <!-- Main Content Grid -->
+        <div class="content">
+            <!-- About Card -->
+            <div class="card">
+                <h2><span class="icon">📋</span> About the Project</h2>
+                <p>Code Studio is a comprehensive web development platform that provides modern, responsive, and user-friendly interfaces for application development.</p>
+                <p>This project showcases professional-grade UI components with clean design patterns and best practices in web development.</p>
+                <div class="highlight">
+                    <strong>Organization:</strong> Syncfusion Private Limited<br>
+                    <strong>Repository:</strong> cloud-test
+                </div>
+            </div>
+
+            <!-- Features Card -->
+            <div class="card feature-card">
+                <h2><span class="icon">✨</span> Features</h2>
+                <ul>
+                    <li><span class="icon">🎨</span> Modern, responsive design</li>
+                    <li><span class="icon">🔒</span> Secure authentication system</li>
+                    <li><span class="icon">💜</span> Beautiful purple gradient theme</li>
+                    <li><span class="icon">📱</span> Mobile-friendly interface</li>
+                    <li><span class="icon">⚡</span> Fast and lightweight</li>
+                    <li><span class="icon">🌐</span> Cross-browser compatible</li>
+                </ul>
+            </div>
+
+            <!-- Repository Contents Card -->
+            <div class="card">
+                <h2><span class="icon">📁</span> Repository Contents</h2>
+                <p>This repository contains the following files and resources:</p>
+                
+                <h3>Pages</h3>
+                <ul>
+                    <li><span class="icon">🏠</span> <strong>index.html</strong> - Landing page (current)</li>
+                    <li><span class="icon">🔐</span> <strong>login.html</strong> - User authentication page</li>
+                </ul>
+
+                <h3>Documentation</h3>
+                <ul>
+                    <li><span class="icon">📝</span> <strong>README.md</strong> - Project documentation</li>
+                </ul>
+
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="number">2</span>
+                        <span class="label">HTML Pages</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="number">100%</span>
+                        <span class="label">Responsive</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Login Page Showcase Card -->
+            <div class="card">
+                <h2><span class="icon">🔐</span> Authentication System</h2>
+                <p>Our login page provides a secure and elegant authentication experience with:</p>
+                <ul>
+                    <li>Clean, intuitive interface</li>
+                    <li>Form validation</li>
+                    <li>Password visibility toggle</li>
+                    <li>Remember me functionality</li>
+                    <li>Responsive design</li>
+                </ul>
+                <div style="margin-top: 20px;">
+                    <span class="badge">HTML5</span>
+                    <span class="badge">CSS3</span>
+                    <span class="badge">JavaScript</span>
+                    <span class="badge">Responsive</span>
+                </div>
+                <a href="login.html" class="cta-button">🚀 Access Login Page</a>
+            </div>
+
+            <!-- Tech Stack Card -->
+            <div class="card">
+                <h2><span class="icon">🛠️</span> Technology Stack</h2>
+                <p>Built with modern web technologies:</p>
+                <ul>
+                    <li><span class="icon">📄</span> HTML5 - Semantic markup</li>
+                    <li><span class="icon">🎨</span> CSS3 - Advanced styling with gradients</li>
+                    <li><span class="icon">⚙️</span> JavaScript - Interactive functionality</li>
+                    <li><span class="icon">📐</span> Responsive Design - Mobile-first approach</li>
+                </ul>
+            </div>
+
+            <!-- Quick Start Card -->
+            <div class="card feature-card">
+                <h2><span class="icon">🚀</span> Quick Start</h2>
+                <p>Get started with Code Studio in seconds:</p>
+                <ol style="padding-left: 20px; line-height: 2;">
+                    <li>Explore the landing page (you're here!)</li>
+                    <li>Visit the login page to see authentication UI</li>
+                    <li>Check the code structure and styling</li>
+                    <li>Customize for your needs</li>
+                </ol>
+                <div style="margin-top: 20px; text-align: center;">
+                    <a href="login.html" class="cta-button">Get Started →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>© 2024 Code Studio - Syncfusion Private Limited</p>
+            <p>Building modern web experiences with passion and precision</p>
+        </footer>
+    </div>
+</body>
+</html>
