@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Test - Repository Files</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .file-section {
+            margin-bottom: 30px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .file-header {
+            background: #f5f5f5;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .file-header:hover {
+            background: #ebebeb;
+        }
+
+        .file-header h2 {
+            font-size: 18px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .file-icon {
+            width: 24px;
+            height: 24px;
+            display: inline-block;
+        }
+
+        .file-info {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .file-content {
+            padding: 20px;
+            background: #fafafa;
+            border-top: 1px solid #e0e0e0;
+            display: none;
+        }
+
+        .file-content.active {
+            display: block;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .check-button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .check-button:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+        }
+
+        .check-button.checked {
+            background: #667eea;
+        }
+
+        .check-status {
+            display: inline-block;
+            margin-left: 10px;
+            font-size: 20px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: #f5f5f5;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .toggle-icon {
+            transition: transform 0.3s;
+        }
+
+        .toggle-icon.active {
+            transform: rotate(90deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Cloud Test Repository</h1>
+            <p>Code Studio product by Syncfusion Pvt Ltd</p>
+        </div>
+
+        <div class="content">
+            <div class="file-section">
+                <div class="file-header" onclick="toggleFile('readme')">
+                    <h2>
+                        <span class="toggle-icon" id="toggle-readme">▶</span>
+                        <span class="file-icon">📄</span>
+                        README.md
+                    </h2>
+                    <div>
+                        <span class="file-info">66 bytes</span>
+                        <button class="check-button" onclick="checkFile('readme', event)">Check</button>
+                        <span class="check-status" id="status-readme"></span>
+                    </div>
+                </div>
+                <div class="file-content" id="content-readme">
+                    <div class="code-block"># cloud-test
+code studio product is comes under syncfusion pvt lmt</div>
+                </div>
+            </div>
+
+            <div class="file-section">
+                <div class="file-header" onclick="toggleFile('login')">
+                    <h2>
+                        <span class="toggle-icon" id="toggle-login">▶</span>
+                        <span class="file-icon">🌐</span>
+                        login.html
+                    </h2>
+                    <div>
+                        <span class="file-info">4984 bytes</span>
+                        <button class="check-button" onclick="checkFile('login', event)">Check</button>
+                        <span class="check-status" id="status-login"></span>
+                    </div>
+                </div>
+                <div class="file-content" id="content-login">
+                    <div class="code-block">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Login - Code Studio&lt;/title&gt;
+    &lt;style&gt;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .login-container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-header h1 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .login-header p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .remember-me input[type="checkbox"] {
+            cursor: pointer;
+        }
+
+        .forgot-password {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .login-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .login-button:active {
+            transform: translateY(0);
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .signup-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="login-container"&gt;
+        &lt;div class="login-header"&gt;
+            &lt;h1&gt;Welcome Back&lt;/h1&gt;
+            &lt;p&gt;Login to Code Studio&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;form id="loginForm"&gt;
+            &lt;div class="form-group"&gt;
+                &lt;label for="email"&gt;Email Address&lt;/label&gt;
+                &lt;input type="email" id="email" name="email" placeholder="Enter your email" required&gt;
+            &lt;/div&gt;
+            &lt;div class="form-group"&gt;
+                &lt;label for="password"&gt;Password&lt;/label&gt;
+                &lt;input type="password" id="password" name="password" placeholder="Enter your password" required&gt;
+            &lt;/div&gt;
+            &lt;div class="form-options"&gt;
+                &lt;label class="remember-me"&gt;
+                    &lt;input type="checkbox" id="remember" name="remember"&gt;
+                    &lt;span&gt;Remember me&lt;/span&gt;
+                &lt;/label&gt;
+                &lt;a href="#" class="forgot-password"&gt;Forgot Password?&lt;/a&gt;
+            &lt;/div&gt;
+            &lt;button type="submit" class="login-button"&gt;Login&lt;/button&gt;
+        &lt;/form&gt;
+        &lt;div class="signup-link"&gt;
+            Don't have an account? &lt;a href="#"&gt;Sign up&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;script&gt;
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            // Simple validation
+            if (email && password) {
+                alert('Login functionality would be implemented here!\nEmail: ' + email);
+            }
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2024 Syncfusion Pvt Ltd - Code Studio Repository Viewer</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleFile(fileId) {
+            const content = document.getElementById('content-' + fileId);
+            const toggle = document.getElementById('toggle-' + fileId);
+            
+            content.classList.toggle('active');
+            toggle.classList.toggle('active');
+        }
+
+        function checkFile(fileId, event) {
+            event.stopPropagation();
+            const button = event.target;
+            const status = document.getElementById('status-' + fileId);
+            
+            if (button.classList.contains('checked')) {
+                button.classList.remove('checked');
+                button.textContent = 'Check';
+                status.textContent = '';
+            } else {
+                button.classList.add('checked');
+                button.textContent = 'Checked';
+                status.textContent = '✓';
+            }
+        }
+    </script>
+</body>
+</html>
