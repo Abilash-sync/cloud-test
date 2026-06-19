@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud-Test Repository Overview | Syncfusion Code Studio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #8b5cf6;
+            --accent-color: #ec4899;
+            --dark-bg: #0f172a;
+            --card-bg: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --border-color: #334155;
+            --success-color: #10b981;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2rem 0;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--card-bg);
+            border-bottom: 2px solid var(--border-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 140px;
+            z-index: 99;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-content a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-content a:hover {
+            color: var(--text-primary);
+            background: rgba(99, 102, 241, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 48px rgba(99, 102, 241, 0.2);
+        }
+
+        .card h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card h2::before {
+            content: '';
+            width: 4px;
+            height: 2rem;
+            background: var(--gradient-1);
+            border-radius: 4px;
+        }
+
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Info Section */
+        .info-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .info-item {
+            display: flex;
+            padding: 1rem;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: var(--primary-color);
+            min-width: 120px;
+        }
+
+        .info-value {
+            color: var(--text-primary);
+            flex: 1;
+        }
+
+        /* Stats Cards */
+        .stat-card {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: scale(1.05);
+            border-color: var(--primary-color);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Technology Badges */
+        .tech-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .tech-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%);
+            border-radius: 50px;
+            border: 2px solid rgba(99, 102, 241, 0.4);
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .tech-badge:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary-color);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        .tech-icon {
+            width: 24px;
+            height: 24px;
+            background: var(--gradient-1);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.8rem;
+        }
+
+        /* File Structure */
+        .file-tree {
+            background: rgba(15, 23, 42, 0.5);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            font-family: 'Courier New', monospace;
+        }
+
+        .file-tree-item {
+            padding: 0.5rem;
+            margin: 0.25rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background 0.2s ease;
+        }
+
+        .file-tree-item:hover {
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 4px;
+        }
+
+        .file-icon {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .file-details {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-left: auto;
+        }
+
+        /* Features List */
+        .features-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 8px;
+            border-left: 4px solid var(--success-color);
+        }
+
+        .feature-icon {
+            width: 24px;
+            height: 24px;
+            background: var(--success-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .feature-content h3 {
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+            font-size: 1.1rem;
+        }
+
+        .feature-content p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--gradient-1);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.5rem;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            border: 3px solid var(--card-bg);
+        }
+
+        .timeline-content {
+            background: rgba(99, 102, 241, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        .timeline-date {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Purpose Section */
+        .purpose-box {
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 2px solid rgba(236, 72, 153, 0.3);
+            text-align: center;
+        }
+
+        .purpose-box h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            background: var(--gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .purpose-box p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--card-bg);
+            border-top: 2px solid var(--border-color);
+            padding: 2rem 0;
+            margin-top: 4rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .nav-content {
+                gap: 0.5rem;
+            }
+
+            .nav-content a {
+                font-size: 0.9rem;
+                padding: 0.5rem;
+            }
+
+            .card {
+                padding: 1.5rem;
+            }
+
+            .grid-2, .grid-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            nav {
+                top: 120px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .card:nth-child(2) { animation-delay: 0.1s; }
+        .card:nth-child(3) { animation-delay: 0.2s; }
+        .card:nth-child(4) { animation-delay: 0.3s; }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-color);
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(79, 172, 254, 0.1) 0%, rgba(0, 242, 254, 0.1) 100%);
+            border: 2px solid rgba(79, 172, 254, 0.3);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+        }
+
+        .highlight-box strong {
+            color: #4facfe;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <h1>🚀 Cloud-Test Repository</h1>
+            <p class="subtitle">Code Studio Demo Repository | Syncfusion Pvt Ltd</p>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-content">
+            <a href="#overview">Overview</a>
+            <a href="#structure">Structure</a>
+            <a href="#technology">Technology</a>
+            <a href="#features">Features</a>
+            <a href="#statistics">Statistics</a>
+            <a href="#git-info">Git Info</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        
+        <!-- Overview Section -->
+        <section id="overview">
+            <div class="card">
+                <h2>📋 Repository Overview</h2>
+                <div class="purpose-box">
+                    <h3>Purpose & Mission</h3>
+                    <p>Test and demonstration repository for Code Studio product, featuring a modern, responsive login interface with professional design and functionality validation.</p>
+                </div>
+                
+                <div class="info-grid" style="margin-top: 2rem;">
+                    <div class="info-item">
+                        <span class="info-label">Repository:</span>
+                        <span class="info-value">cloud-test</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Owner:</span>
+                        <span class="info-value">Syncfusion Pvt Ltd</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Branch:</span>
+                        <span class="info-value">blazor</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Primary Use:</span>
+                        <span class="info-value">Code Studio Product Demo/Testing</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Statistics Section -->
+        <section id="statistics">
+            <div class="card">
+                <h2>📊 Repository Statistics</h2>
+                <div class="grid-3">
+                    <div class="stat-card">
+                        <div class="stat-number">2</div>
+                        <div class="stat-label">Total Files</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">183</div>
+                        <div class="stat-label">Lines of Code</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">5.0</div>
+                        <div class="stat-label">KB Total Size</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Technologies</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">1</div>
+                        <div class="stat-label">Active Branch</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">1</div>
+                        <div class="stat-label">Commit</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- File Structure Section -->
+        <section id="structure">
+            <div class="card">
+                <h2>📁 File Structure</h2>
+                <div class="file-tree">
+                    <div class="file-tree-item">
+                        <span class="file-icon">📂</span>
+                        <span>cloud-test/</span>
+                    </div>
+                    <div class="file-tree-item" style="margin-left: 2rem;">
+                        <span class="file-icon">📄</span>
+                        <span>README.md</span>
+                        <span class="file-details">66 bytes</span>
+                    </div>
+                    <div class="file-tree-item" style="margin-left: 2rem;">
+                        <span class="file-icon">🌐</span>
+                        <span>login.html</span>
+                        <span class="file-details">4,984 bytes | 183 lines</span>
+                    </div>
+                </div>
+
+                <div class="highlight-box" style="margin-top: 2rem;">
+                    <p><strong>Primary File:</strong> login.html serves as the main demonstration file, showcasing a complete login interface with modern design patterns and form validation.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technology Stack Section -->
+        <section id="technology">
+            <div class="card">
+                <h2>💻 Technology Stack</h2>
+                <div class="tech-grid">
+                    <div class="tech-badge">
+                        <div class="tech-icon">H5</div>
+                        <span>HTML5</span>
+                    </div>
+                    <div class="tech-badge">
+                        <div class="tech-icon">C3</div>
+                        <span>CSS3</span>
+                    </div>
+                    <div class="tech-badge">
+                        <div class="tech-icon">JS</div>
+                        <span>Vanilla JavaScript</span>
+                    </div>
+                </div>
+
+                <div class="grid-2" style="margin-top: 2rem;">
+                    <div>
+                        <h3 style="color: var(--primary-color); margin-bottom: 1rem;">Frontend Technologies</h3>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-label">Markup:</span>
+                                <span class="info-value">HTML5 with semantic elements</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Styling:</span>
+                                <span class="info-value">CSS3 with modern gradients and flexbox</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Scripting:</span>
+                                <span class="info-value">Pure JavaScript (no frameworks)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--primary-color); margin-bottom: 1rem;">Design Features</h3>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-label">Layout:</span>
+                                <span class="info-value">Responsive flexbox design</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Colors:</span>
+                                <span class="info-value">Purple gradient theme</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">UX:</span>
+                                <span class="info-value">Form validation & user feedback</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features">
+            <div class="card">
+                <h2>✨ Key Features</h2>
+                <div class="features-list">
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <div class="feature-content">
+                            <h3>Responsive Login Interface</h3>
+                            <p>Fully responsive design that adapts seamlessly to desktop, tablet, and mobile devices with optimized layouts for all screen sizes.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <div class="feature-content">
+                            <h3>Email & Password Validation</h3>
+                            <p>Client-side form validation ensuring proper email format and password requirements before submission.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <div class="feature-content">
+                            <h3>Remember Me Functionality</h3>
+                            <p>Checkbox option for users to save their login credentials for convenience and improved user experience.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <div class="feature-content">
+                            <h3>Modern Purple Gradient Design</h3>
+                            <p>Eye-catching purple gradient color scheme with smooth transitions and modern UI elements that reflect contemporary design trends.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <div class="feature-content">
+                            <h3>Clean & Professional UI</h3>
+                            <p>Minimalist interface design with proper spacing, typography, and visual hierarchy for optimal user engagement.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Git Information Section -->
+        <section id="git-info">
+            <div class="card">
+                <h2>🔧 Git Configuration & History</h2>
+                
+                <div class="grid-2">
+                    <div>
+                        <h3 style="color: var(--primary-color); margin-bottom: 1rem;">Branch Information</h3>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-label">Current Branch:</span>
+                                <span class="info-value">blazor</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Status:</span>
+                                <span class="info-value" style="color: var(--success-color);">Active</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--primary-color); margin-bottom: 1rem;">Repository Stats</h3>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-label">Total Commits:</span>
+                                <span class="info-value">1</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Contributors:</span>
+                                <span class="info-value">Code Studio</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 style="color: var(--primary-color); margin: 2rem 0 1rem;">Commit Timeline</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">📅 April 20, 2026</div>
+                            <p style="color: var(--text-secondary); margin-top: 0.5rem;">
+                                <strong style="color: var(--text-primary);">Initial Commit</strong><br>
+                                Author: Code Studio<br>
+                                Repository initialization with README and login.html demo file.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <p><strong>Note:</strong> This is a demonstration repository with a single initial commit, designed to showcase the Code Studio product capabilities and features.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Project Highlights -->
+        <section>
+            <div class="card">
+                <h2>🎯 Project Highlights</h2>
+                <div class="grid-2">
+                    <div class="highlight-box">
+                        <h3 style="margin-bottom: 1rem;">🎨 Design Excellence</h3>
+                        <p>Modern purple gradient design with smooth animations, professional typography, and responsive layouts that work across all devices.</p>
+                    </div>
+                    <div class="highlight-box">
+                        <h3 style="margin-bottom: 1rem;">⚡ Performance Focus</h3>
+                        <p>Lightweight implementation using vanilla JavaScript without external dependencies, ensuring fast load times and optimal performance.</p>
+                    </div>
+                    <div class="highlight-box">
+                        <h3 style="margin-bottom: 1rem;">🔒 Form Validation</h3>
+                        <p>Robust client-side validation for email and password fields, providing immediate user feedback and preventing invalid submissions.</p>
+                    </div>
+                    <div class="highlight-box">
+                        <h3 style="margin-bottom: 1rem;">📱 Mobile Optimized</h3>
+                        <p>Fully responsive design that adapts seamlessly to different screen sizes, ensuring a great user experience on any device.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p style="font-size: 1.1rem; margin-bottom: 0.5rem;">Cloud-Test Repository Overview</p>
+            <p>Powered by Syncfusion Code Studio | Branch: blazor</p>
+            <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.7;">
+                Generated Repository Analysis Dashboard
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
