@@ -1,6 +1,6 @@
 ---
 name: createpr
-description: Generic PR creation workflow: branch checks, test gate, fill template, push, and open PR via Git. Works for any Git-based repository and any tech stack.
+description: Generic PR creation workflow branch checks, test gate, fill template, push, and open PR via Git. Works for any Git-based repository and any tech stack.
 ---
 # Generic PR Creation Skill
 
