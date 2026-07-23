@@ -1,8 +1,10 @@
+## This is from .github/copilot-instructions.md
 ## This is from .codestudio/codestudio-instructions.md
+## AGENTS_MD_VERIFIED ##
 
 # cloud-test
 <<<<<<< HEAD
-Sync code studio product is comes under syncfusion pvt lmt
+Sync code studio product is comes under syncfusion pvt lmt hitl
 =======
 
 ## Overview
