@@ -1,2 +1,2 @@
 # cloud-test
-code studio product is comes under syncfusion pvt lmt
+Code Studio is a product of Syncfusion Pvt. Ltd.
