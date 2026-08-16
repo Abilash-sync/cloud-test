@@ -1,0 +1,306 @@
+/* referred by instructions.md */
+/* ## AGENTS_MD_VERIFIED ## */
+
+@use "sass:color";
+
+// Variables
+$primary-color: #6c5ce7;
+$primary-light: #a29bfe;
+$bg-color: #f5f6fa;
+$text-main: #2d3436;
+$text-light: #636e72;
+$white: #ffffff;
+$danger: #ff7675;
+$success: #00b894;
+$border-color: #dfe6e9;
+$shadow: 0 10px 30px rgba(0,0,0,0.1);
+$border-radius: 12px;
+$transition: all 0.3s ease;
+
+// Mixins
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+// Reset
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: $bg-color;
+    @include flex-center;
+    min-height: 100vh;
+    padding: 20px;
+    color: $text-main;
+}
+
+// Container
+.todo-container {
+    background-color: $white;
+    width: 100%;
+    max-width: 500px;
+    border-radius: $border-radius;
+    box-shadow: $shadow;
+    overflow: hidden;
+}
+
+// Header
+header {
+    background: linear-gradient(135deg, $primary-color, $primary-light);
+    color: $white;
+    padding: 30px 20px;
+    text-align: center;
+
+    h1 {
+        font-size: 2rem;
+        margin-bottom: 5px;
+        letter-spacing: 1px;
+    }
+
+    p {
+        font-size: 0.9rem;
+        opacity: 0.9;
+    }
+}
+
+// Input Section
+.input-section {
+    padding: 20px;
+    display: flex;
+    gap: 10px;
+    border-bottom: 1px solid $border-color;
+    background-color: #fafbfc;
+
+    input[type="text"] {
+        flex: 1;
+        padding: 12px 15px;
+        border: 2px solid $border-color;
+        border-radius: $border-radius;
+        font-size: 1rem;
+        outline: none;
+        transition: $transition;
+
+        &:focus {
+            border-color: $primary-light;
+            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.1);
+        }
+    }
+
+    button {
+        background-color: $primary-color;
+        color: $white;
+        border: none;
+        border-radius: $border-radius;
+        width: 50px;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: $transition;
+        @include flex-center;
+
+        &:hover {
+            background-color: color.adjust($primary-color, $lightness: -10%);
+            transform: translateY(-2px);
+        }
+        
+        &:active {
+            transform: translateY(0);
+        }
+    }
+}
+
+// Filters
+.filters {
+    @include flex-center;
+    gap: 10px;
+    padding: 15px 20px;
+    border-bottom: 1px solid $border-color;
+
+    .filter-btn {
+        background: transparent;
+        border: 1px solid transparent;
+        padding: 5px 12px;
+        border-radius: 20px;
+        color: $text-light;
+        cursor: pointer;
+        font-size: 0.9rem;
+        transition: $transition;
+        font-weight: 500;
+
+        &:hover {
+            color: $primary-color;
+            background-color: rgba(108, 92, 231, 0.05);
+        }
+
+        &.active {
+            border-color: $primary-color;
+            color: $primary-color;
+            background-color: rgba(108, 92, 231, 0.05);
+        }
+    }
+}
+
+// Todo List
+.todo-list {
+    list-style: none;
+    max-height: 400px;
+    overflow-y: auto;
+    
+    // Custom scrollbar
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+    &::-webkit-scrollbar-track {
+        background: $bg-color;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 3px;
+    }
+
+    .todo-item {
+        @include flex-between;
+        padding: 15px 20px;
+        border-bottom: 1px solid $border-color;
+        transition: $transition;
+        background-color: $white;
+
+        &:hover {
+            background-color: #fcfcfc;
+            
+            .delete-btn {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        &.completed {
+            .task-text {
+                text-decoration: line-through;
+                color: $text-light;
+                opacity: 0.7;
+            }
+        }
+
+        .task-text {
+            flex: 1;
+            margin: 0 15px;
+            font-size: 1rem;
+            transition: $transition;
+            word-break: break-all;
+        }
+
+        .delete-btn {
+            background: none;
+            border: none;
+            color: $danger;
+            cursor: pointer;
+            font-size: 1.1rem;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: $transition;
+            padding: 5px;
+
+            &:hover {
+                color: color.adjust($danger, $lightness: -15%);
+            }
+            
+            // Show delete button on mobile regardless of hover
+            @media (max-width: 768px) {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    }
+}
+
+// Custom Checkbox
+.checkbox-container {
+    display: block;
+    position: relative;
+    padding-left: 25px;
+    cursor: pointer;
+    font-size: 22px;
+    user-select: none;
+
+    input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+
+        &:checked ~ .checkmark {
+            background-color: $success;
+            border-color: $success;
+        }
+
+        &:checked ~ .checkmark:after {
+            display: block;
+        }
+    }
+
+    .checkmark {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        height: 20px;
+        width: 20px;
+        background-color: transparent;
+        border: 2px solid $border-color;
+        border-radius: 5px;
+        transition: $transition;
+
+        &:after {
+            content: "";
+            position: absolute;
+            display: none;
+            left: 5px;
+            top: 1px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+    }
+    
+    &:hover input ~ .checkmark {
+        border-color: $success;
+    }
+}
+
+// Footer
+footer {
+    @include flex-between;
+    padding: 15px 20px;
+    background-color: #fafbfc;
+    border-top: 1px solid $border-color;
+    font-size: 0.9rem;
+    color: $text-light;
+
+    #clear-completed {
+        background: none;
+        border: none;
+        color: $text-light;
+        cursor: pointer;
+        transition: $transition;
+        
+        &:hover {
+            color: $danger;
+            text-decoration: underline;
+        }
+    }
+}
