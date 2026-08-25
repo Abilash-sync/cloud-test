@@ -1,0 +1,411 @@
+## This is from .github/copilot-instructions.md
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Alex Rivera — Frontend Engineer & UI Designer. Personal portfolio showcasing projects, experience, and skills." />
+  <title>Alex Rivera · Frontend Engineer & UI Designer</title>
+
+  <!-- Fonts: distinctive display serif + refined sans body -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,700;9..144,900&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ============================ NAV ============================ -->
+  <header class="site-header" id="top">
+    <nav class="nav" aria-label="Primary">
+      <a class="brand" href="#top">
+        <span class="brand__mark">AR</span>
+        <span class="brand__name">Alex Rivera</span>
+      </a>
+
+      <input type="checkbox" id="nav-toggle" class="nav__toggle" aria-label="Toggle navigation menu" />
+      <label for="nav-toggle" class="nav__hamburger" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </label>
+
+      <ul class="nav__list">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact" class="nav__cta">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ============================ HERO ============================ -->
+    <section class="hero" id="home">
+      <div class="hero__bg" aria-hidden="true">
+        <span class="orb orb--1"></span>
+        <span class="orb orb--2"></span>
+        <span class="grain"></span>
+      </div>
+
+      <div class="hero__inner container">
+        <p class="hero__eyebrow reveal">
+          <span class="status-dot" aria-hidden="true"></span>
+          Available for freelance &amp; full-time roles
+        </p>
+        <h1 class="hero__title reveal">
+          <span class="line">Designing</span>
+          <span class="line line--accent">interfaces<span class="amp">&amp;</span></span>
+          <span class="line">experiences</span>
+          <span class="line line--muted">that feel&nbsp;alive.</span>
+        </h1>
+
+        <p class="hero__lede reveal">
+          I'm Alex — a frontend engineer and UI designer crafting thoughtful,
+          performant web products. I care about the small details: motion,
+          type, accessibility, and the feel of a button under your thumb.
+        </p>
+
+        <div class="hero__actions reveal">
+          <a href="#projects" class="btn btn--primary">View my work</a>
+          <a href="#contact" class="btn btn--ghost">Get in touch</a>
+        </div>
+
+        <dl class="hero__stats reveal">
+          <div class="stat">
+            <dt>6+</dt><dd>Years building<br/>for the web</dd>
+          </div>
+          <div class="stat">
+            <dt>40+</dt><dd>Shipped<br/>projects</dd>
+          </div>
+          <div class="stat">
+            <dt>20</dt><dd>Happy<br/>clients</dd>
+          </div>
+        </dl>
+      </div>
+
+      <a href="#about" class="scroll-cue" aria-label="Scroll to about section">
+        <span>Scroll</span>
+        <span class="scroll-cue__line" aria-hidden="true"></span>
+      </a>
+    </section>
+
+    <!-- ============================ ABOUT ============================ -->
+    <section class="section about" id="about">
+      <div class="container about__grid">
+        <header class="section__head reveal">
+          <span class="section__index">01</span>
+          <h2 class="section__title">About Me</h2>
+        </header>
+
+        <div class="about__body">
+          <div class="about__portrait reveal">
+            <div class="portrait__frame">
+              <span class="portrait__initials">AR</span>
+            </div>
+            <ul class="about__meta">
+              <li><span>Based in</span><strong>Lisbon, Portugal</strong></li>
+              <li><span>Focus</span><strong>Frontend &amp; Design Systems</strong></li>
+              <li><span>Currently</span><strong>Open to new projects</strong></li>
+            </ul>
+          </div>
+
+          <div class="about__text reveal">
+            <p class="about__lead">
+              I build human-centered software at the intersection of design and engineering.
+            </p>
+            <p>
+              For over six years I've partnered with startups and studios to turn
+              rough ideas into polished products — from design-system foundations
+              and component libraries to motion-rich marketing sites and
+              complex data interfaces.
+            </p>
+            <p>
+              My approach blends rigorous engineering with an eye for craft: I sweat
+              the loading states, the empty states, and the moment a transition
+              makes a product feel considered. When I'm not shipping, you'll find
+              me sketching type, trail-running the Sintra hills, or contributing
+              to open-source UI libraries.
+            </p>
+            <a href="#contact" class="link-arrow">Let's work together <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ SKILLS ============================ -->
+    <section class="section skills" id="skills">
+      <div class="container">
+        <header class="section__head reveal">
+          <span class="section__index">02</span>
+          <h2 class="section__title">Skills &amp; Toolset</h2>
+          <p class="section__kicker">The stack I reach for, daily.</p>
+        </header>
+
+        <div class="skills__grid">
+          <article class="skill-card reveal">
+            <h3>Frontend</h3>
+            <p>Interfaces, components, and the craft of building them well.</p>
+            <ul class="chips">
+              <li>HTML5</li><li>CSS3</li><li>JavaScript</li>
+              <li>TypeScript</li><li>React</li><li>Next.js</li><li>Vue</li>
+            </ul>
+          </article>
+
+          <article class="skill-card reveal">
+            <h3>Styling &amp; Design</h3>
+            <p>Design systems, tokens, and the language between screens.</p>
+            <ul class="chips">
+              <li>Sass</li><li>Tailwind</li><li>Styled Components</li>
+              <li>Figma</li><li>Storybook</li><li>Framer Motion</li>
+            </ul>
+          </article>
+
+          <article class="skill-card reveal">
+            <h3>Backend &amp; Data</h3>
+            <p>Enough to ship full features end to end.</p>
+            <ul class="chips">
+              <li>Node.js</li><li>Express</li><li>REST</li>
+              <li>GraphQL</li><li>PostgreSQL</li><li>MongoDB</li>
+            </ul>
+          </article>
+
+          <article class="skill-card reveal">
+            <h3>Tooling &amp; DevOps</h3>
+            <p>Keeping the pipeline boring and the deploys calm.</p>
+            <ul class="chips">
+              <li>Git</li><li>GitHub Actions</li><li>Vite</li>
+              <li>Docker</li><li>Vercel</li><li>Jest</li><li>Playwright</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ PROJECTS ============================ -->
+    <section class="section projects" id="projects">
+      <div class="container">
+        <header class="section__head reveal">
+          <span class="section__index">03</span>
+          <h2 class="section__title">Selected Work</h2>
+          <p class="section__kicker">A few projects I'm proud of.</p>
+        </header>
+
+        <div class="projects__grid">
+          <article class="project-card reveal">
+            <div class="project-card__visual" data-tone="amber">
+              <span class="project-card__glyph" aria-hidden="true">◐</span>
+            </div>
+            <div class="project-card__body">
+              <span class="project-card__tag">Product · 2024</span>
+              <h3>Halo Analytics Dashboard</h3>
+              <p>A real-time analytics suite for marketing teams — redesigned around a component library that cut feature-build time by 60%.</p>
+              <ul class="chips chips--mini">
+                <li>React</li><li>TypeScript</li><li>D3</li><li>Design System</li>
+              </ul>
+              <a href="#" class="link-arrow">Case study <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+          <article class="project-card reveal">
+            <div class="project-card__visual" data-tone="coral">
+              <span class="project-card__glyph" aria-hidden="true">⌘</span>
+            </div>
+            <div class="project-card__body">
+              <span class="project-card__tag">Open Source · 2023</span>
+              <h3>Lumen UI</h3>
+              <p>An accessible, themeable component library with 48 components and dark-mode built in. 2.1k stars and counting.</p>
+              <ul class="chips chips--mini">
+                <li>Vue</li><li>Vite</li><li>Storybook</li><li>a11y</li>
+              </ul>
+              <a href="#" class="link-arrow">View repo <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+          <article class="project-card reveal">
+            <div class="project-card__visual" data-tone="teal">
+              <span class="project-card__glyph" aria-hidden="true">✦</span>
+            </div>
+            <div class="project-card__body">
+              <span class="project-card__tag">Marketing · 2023</span>
+              <h3>Northwind Studio</h3>
+              <p>An award-shortlisted marketing site for an architecture studio, with scroll-driven motion and an editorial CMS.</p>
+              <ul class="chips chips--mini">
+                <li>Next.js</li><li>GSAP</li><li>Sanity</li>
+              </ul>
+              <a href="#" class="link-arrow">Case study <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+          <article class="project-card reveal">
+            <div class="project-card__visual" data-tone="plum">
+              <span class="project-card__glyph" aria-hidden="true">◈</span>
+            </div>
+            <div class="project-card__body">
+              <span class="project-card__tag">Mobile · 2022</span>
+              <h3>Tide PWA</h3>
+              <p>A progressive web app for surf forecasters — offline-first maps and a buttery 60fps chart experience.</p>
+              <ul class="chips chips--mini">
+                <li>PWA</li><li>React</li><li>MapLibre</li><li>Workbox</li>
+              </ul>
+              <a href="#" class="link-arrow">Case study <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ EXPERIENCE ============================ -->
+    <section class="section experience" id="experience">
+      <div class="container">
+        <header class="section__head reveal">
+          <span class="section__index">04</span>
+          <h2 class="section__title">Experience</h2>
+          <p class="section__kicker">Where I've spent the last few years.</p>
+        </header>
+
+        <ol class="timeline">
+          <li class="timeline__item reveal">
+            <div class="timeline__dot"></div>
+            <div class="timeline__content">
+              <span class="timeline__when">2022 — Present</span>
+              <h3>Senior Frontend Engineer · Brightwave</h3>
+              <p>Lead the web platform guild: own the design system, mentor four engineers, and drive performance budgets that improved LCP site-wide by 38%.</p>
+            </div>
+          </li>
+
+          <li class="timeline__item reveal">
+            <div class="timeline__dot"></div>
+            <div class="timeline__content">
+              <span class="timeline__when">2019 — 2022</span>
+              <h3>Frontend Engineer · Northwind Digital</h3>
+              <p>Shipped marketing and product sites for international clients. Built the studio's reusable component kit adopted across 12 client projects.</p>
+            </div>
+          </li>
+
+          <li class="timeline__item reveal">
+            <div class="timeline__dot"></div>
+            <div class="timeline__content">
+              <span class="timeline__when">2018 — 2019</span>
+              <h3>UI Developer · Studio Atlas</h3>
+              <p>Translated Figma designs into pixel-faithful, accessible interfaces. First engineering hire — set up the team's linting and CI conventions.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============================ EDUCATION ============================ -->
+    <section class="section education" id="education">
+      <div class="container">
+        <header class="section__head reveal">
+          <span class="section__index">05</span>
+          <h2 class="section__title">Education</h2>
+          <p class="section__kicker">Foundations &amp; continued learning.</p>
+        </header>
+
+        <div class="education__grid">
+          <article class="edu-card reveal">
+            <div class="edu-card__icon" aria-hidden="true">🎓</div>
+            <h3>B.Sc. Computer Science</h3>
+            <p class="edu-card__school">University of Lisbon</p>
+            <p class="edu-card__when">2014 — 2018</p>
+            <p>Focus on Human-Computer Interaction and web systems. Graduated with honours; final thesis on accessible data visualization.</p>
+          </article>
+
+          <article class="edu-card reveal">
+            <div class="edu-card__icon" aria-hidden="true">📜</div>
+            <h3>Interaction Design Foundation</h3>
+            <p class="edu-card__school">IDF Certificate</p>
+            <p class="edu-card__when">2021</p>
+            <p>Coursework in UX research, design systems, and usability testing — paired with hands-on studio projects.</p>
+          </article>
+
+          <article class="edu-card reveal">
+            <div class="edu-card__icon" aria-hidden="true">🛠️</div>
+            <h3>Ongoing</h3>
+            <p class="edu-card__school">Self-directed</p>
+            <p class="edu-card__when">Always</p>
+            <p>I keep learning — accessibility audits, advanced CSS, and the occasional deep-dive into rendering performance.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ CONTACT ============================ -->
+    <section class="section contact" id="contact">
+      <div class="container contact__inner">
+        <div class="contact__intro reveal">
+          <span class="section__index">06</span>
+          <h2 class="contact__title">Let's build<br/>something <em>great</em>.</h2>
+          <p class="contact__lede">
+            Have a project, a role, or just a question? I read every message and
+            usually reply within a day. Pick whatever suits you below.
+          </p>
+
+          <a href="mailto:hello@alexrivera.dev" class="contact__email">
+            hello@alexrivera.dev
+          </a>
+
+          <ul class="socials" aria-label="Social links">
+            <li><a href="#" aria-label="GitHub">GitHub</a></li>
+            <li><a href="#" aria-label="LinkedIn">LinkedIn</a></li>
+            <li><a href="#" aria-label="Dribbble">Dribbble</a></li>
+            <li><a href="#" aria-label="X (formerly Twitter)">X</a></li>
+            <li><a href="#" aria-label="CodePen">CodePen</a></li>
+          </ul>
+        </div>
+
+        <form class="contact__form reveal" onsubmit="return false;">
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" type="text" name="name" placeholder="Your name" autocomplete="name" />
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" type="email" name="email" placeholder="you@email.com" autocomplete="email" />
+          </div>
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="4" placeholder="Tell me a little about what you're working on…"></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary btn--block">Send message</button>
+          <p class="form__note">Form is a static demo — wire it to your backend or a form service.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+    <!-- ============================ FOOTER ============================ -->
+    <footer class="footer">
+      <div class="container footer__inner">
+        <div class="footer__brand">
+          <span class="brand__mark">AR</span>
+          <div>
+            <p class="footer__name">Alex Rivera</p>
+            <p class="footer__tag">Frontend Engineer &amp; UI Designer</p>
+          </div>
+        </div>
+
+        <nav class="footer__nav" aria-label="Footer">
+          <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          <a href="#experience">Experience</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <div class="footer__meta">
+          <p>© <span id="year">2024</span> Alex Rivera. All rights reserved.</p>
+          <p>Designed &amp; built with care in Lisbon.</p>
+        </div>
+      </div>
+      <div class="footer__base">
+        <a href="#top" class="back-top">Back to top ↑</a>
+      </div>
+    </footer>
+
+</body>
+</html>
