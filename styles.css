@@ -1,0 +1,87 @@
+## AGENTS_MD_VERIFIED ##
+/* Basic reset */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: linear-gradient(135deg, #2b5876 0%, #4e4376 100%);
+  --card-bg: #0f1221;
+  --text: #e9edf5;
+  --muted: #a9b3c7;
+  --accent: #4f46e5; /* indigo-600 */
+  --accent-2: #22d3ee; /* cyan-400 */
+  --shadow: 0 20px 50px rgba(0,0,0,.35);
+}
+
+html, body { height: 100%; }
+body {
+  font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  background: var(--bg);
+  color: var(--text);
+  display: grid;
+  place-items: center;
+  line-height: 1.5;
+}
+
+.page { width: 100%; padding: 24px; }
+
+.welcome-card {
+  margin: 0 auto;
+  max-width: 720px;
+  background: radial-gradient(1200px 500px at top right, rgba(79,70,229,.25), transparent 60%),
+              radial-gradient(800px 400px at bottom left, rgba(34,211,238,.25), transparent 60%),
+              var(--card-bg);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 18px;
+  padding: 48px 40px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.title {
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(90deg, #ffffff, #dbeafe, #67e8f9);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.subtitle {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: clamp(14px, 2.2vw, 18px);
+}
+
+.cta {
+  display: inline-block;
+  margin-top: 28px;
+  padding: 12px 18px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+  box-shadow: 0 8px 24px rgba(79,70,229,.35);
+}
+.cta:hover { transform: translateY(-2px); filter: brightness(1.05); }
+.cta:active { transform: translateY(0px) scale(.99); }
+
+/* Decorative blur orbs */
+.welcome-card::before, .welcome-card::after {
+  content: "";
+  position: absolute;
+  width: 180px; height: 180px;
+  filter: blur(60px);
+  z-index: 0; opacity: .5;
+}
+.welcome-card::before { top: -40px; left: -40px; background: #4f46e5; }
+.welcome-card::after  { bottom: -40px; right: -40px; background: #22d3ee; }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .cta { transition: none; }
+}
