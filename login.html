@@ -120,6 +120,19 @@
             transform: translateY(0);
         }
 
+        .message {
+            display: none;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .message.error { display: block; background: #fdecea; color: #b3261e; }
+        .message.success { display: block; background: #e6f4ea; color: #1e7e34; }
+
+        .login-button:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+
         .signup-link {
             text-align: center;
             margin-top: 20px;
@@ -144,14 +157,15 @@
             <h1>Welcome Back</h1>
             <p>Login to Code Studio</p>
         </div>
-        <form id="loginForm">
+        <div id="message" class="message" role="alert" aria-live="polite"></div>
+        <form id="loginForm" novalidate>
             <div class="form-group">
                 <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                <input type="email" id="email" name="email" placeholder="Enter your email" autocomplete="email" required>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                <input type="password" id="password" name="password" placeholder="Enter your password" autocomplete="current-password" required>
             </div>
             <div class="form-options">
                 <label class="remember-me">
@@ -168,14 +182,51 @@
     </div>
 
     <script>
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
+        const form = document.getElementById('loginForm');
+        const message = document.getElementById('message');
+        const button = form.querySelector('.login-button');
+
+        function showMessage(text, type) {
+            message.textContent = text;
+            message.className = 'message ' + type;
+        }
+
+        form.addEventListener('submit', async function (e) {
             e.preventDefault();
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            
-            // Simple validation
-            if (email && password) {
-                alert('Login functionality would be implemented here!\nEmail: ' + email);
+            const email = form.email.value.trim();
+            const password = form.password.value;
+
+            if (!email || !password) {
+                showMessage('Please enter your email and password.', 'error');
+                return;
+            }
+            if (!form.email.checkValidity()) {
+                showMessage('Please enter a valid email address.', 'error');
+                return;
+            }
+
+            button.disabled = true;
+            button.textContent = 'Logging in...';
+            try {
+                const res = await fetch('/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                const data = await res.json();
+                if (!res.ok) {
+                    showMessage(data.error || 'Login failed.', 'error');
+                    return;
+                }
+                const storage = form.remember.checked ? localStorage : sessionStorage;
+                storage.setItem('authToken', data.token);
+                showMessage('Login successful! Welcome, ' + data.user.email + '.', 'success');
+                form.reset();
+            } catch (err) {
+                showMessage('Unable to reach the server. Please try again.', 'error');
+            } finally {
+                button.disabled = false;
+                button.textContent = 'Login';
             }
         });
     </script>
