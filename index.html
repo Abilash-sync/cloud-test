@@ -4,9 +4,33 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>To-Do List Page</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { color: #333; }
+        input[type='text'] { width: 300px; padding: 10px; margin-right: 10px; }
+        button { padding: 10px; }
+        ul { list-style: none; padding: 0; }
+        li { padding: 5px; }
+    </style>
 </head>
 <body>
+    <h1>To-Do List</h1>
+    <input type="text" id="taskInput" placeholder="Add a new task..." />
+    <button onclick="addTask()">Add Task</button>
+    <ul id="taskList"></ul>
 
+    <script>
+        function addTask() {
+            var input = document.getElementById('taskInput');
+            var task = input.value;
+            if (task) {
+                var li = document.createElement('li');
+                li.textContent = task;
+                document.getElementById('taskList').appendChild(li);
+                input.value = '';
+            }
+        }
+    </script>
 </body>
 </html>
